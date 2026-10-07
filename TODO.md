@@ -6,3 +6,4 @@
 - [x] Commit and push the complete project to `sahilxnahar/Gym` on `main`; preserve the existing GNU GPL version 3 license.
 - [x] Create Railway project `Gym`, connect the PWA service, and verify the public homepage and `/health` endpoint.
 - [ ] Owner review: decide whether to retain or replace the 50GB default volume and whether to remove the extra crashed `gym` service. No destructive cleanup has been performed.
+- [x] Delete only the extra crashed `gym` service as requested; retain the 50GB default volume.
