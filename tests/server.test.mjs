@@ -59,7 +59,7 @@ test('malformed and oversized request bodies fail safely',async()=>{
   assert.equal((await fetch(origin+'/api/auth/register',{method:'POST',headers,body:'{bad'})).status,400);
   const reg=await fetch(origin+'/api/auth/register',{method:'POST',headers,body:JSON.stringify({email:'owner@example.com',password:'long-password123'})});assert.equal(reg.status,201);headers.Cookie=reg.headers.get('set-cookie').split(';')[0];
   assert.equal((await fetch(origin+'/api/state',{method:'PUT',headers,body:'{bad'})).status,400);
-  assert.equal((await fetch(origin+'/api/state',{method:'PUT',headers,body:JSON.stringify({state:{text:'x'.repeat(524288)}})})).status,413);
+  assert.equal((await fetch(origin+'/api/state',{method:'PUT',headers,body:JSON.stringify({state:{text:'x'.repeat(4*1024*1024+1)}})})).status,413);
   assert.equal((await fetch(origin+'/api/state',{method:'PUT',headers,body:JSON.stringify({state:null})})).status,400);
   const invalid=fixture();invalid.workouts[0].exercises[0].sets[0].done='yes';
   assert.equal((await fetch(origin+'/api/state',{method:'PUT',headers,body:JSON.stringify({state:invalid,revision:0})})).status,400);

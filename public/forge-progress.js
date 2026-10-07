@@ -58,5 +58,7 @@
     </section>`;
   }
 
-  window.ForgeProgress = Object.freeze({ XP_PER_SET, XP_PER_SESSION, XP_PER_LEVEL, streakDays, totalXp, render });
+  const api = Object.freeze({ XP_PER_SET, XP_PER_SESSION, XP_PER_LEVEL, streakDays, totalXp, render });
+  globalThis.ForgeProgress = api;
+  if (typeof window !== 'undefined') window.ForgeProgress = api;
 })();

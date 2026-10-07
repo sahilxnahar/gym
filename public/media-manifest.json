@@ -2,6 +2,14 @@
   "schemaVersion": 1,
   "sourceArchive": "forge-source.zip (movement media) and FitQuest-complete.zip (audited; reference preview only)",
   "note": "The Forge archive supplies six local movement GIFs and matching stills. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.",
+  "equipmentIllustrations": [
+    {
+      "file": "/equipment/resistance-band-set.svg",
+      "bytes": 2563,
+      "sha256": "39ebb0517572597ca0d3c6e2786a3b65102d4130ae9fa441a557d6110d7ce003",
+      "source": "Original Forge vector inspired by the user-supplied resistance-band product reference; no retailer branding or screenshot included."
+    }
+  ],
   "gifs": [
     {
       "file": "/demos/squat.gif",
