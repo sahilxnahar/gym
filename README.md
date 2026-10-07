@@ -2,6 +2,8 @@
 
 A mobile-first workout journal built for quick, repeatable training. It combines the supplied Forge training flows with FitQuest-style progression, while keeping a user's journal on their device by default.
 
+**Live app:** <https://gym-pwa-production-d169.up.railway.app/>
+
 ## Features
 
 - Searchable exercise library and movement guides, with all guide GIFs and stills stored in this repository.

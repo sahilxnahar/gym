@@ -1,9 +1,8 @@
 # Gym PWA outcomes
 
-- [x] Build a polished, interactive, mobile-first installable PWA from the supplied Forge application, using FitQuest progression ideas and license-reviewed product patterns from all ten user-provided references.
-- [x] Preserve the exercise catalogue, set-by-set logging, routines, rest timer, history, progress, and offline journal; add journal-derived XP, streak, milestones, and quick logging without fake history.
-- [x] Verify all supplied movement GIFs and still frames are present, decode correctly, reference local paths, and are included in the offline cache. Confirm both archives contain no video files.
-- [x] Package a contributor-ready project with tests, references, third-party notices, media inventory, and Railway configuration; ignore credentials and database files.
-- [x] Confirm `sahilxnahar/Gym` as the target and preserve its existing GNU GPL version 3 `LICENSE`.
-- [x] Create the requested private Railway project `Gym` in the STP Foils workspace.
-- [ ] Push the project and complete a production deployment; verify the Railway public domain and `/health` endpoint.
+- [x] Build the mobile-first installable PWA from the supplied Forge app, adding FitQuest-style progress and license-reviewed patterns from all ten reference repositories.
+- [x] Preserve workouts, routines, exercise search, rest timer, history, offline data, and accessibility; add real-data XP, level, streak, milestones, and quick log.
+- [x] Verify six GIFs, six stills, 192 animated frames, local/offline references, and no video files in either supplied archive.
+- [x] Commit and push the complete project to `sahilxnahar/Gym` on `main`; preserve the existing GNU GPL version 3 license.
+- [x] Create Railway project `Gym`, connect the PWA service, and verify the public homepage and `/health` endpoint.
+- [ ] Owner review: decide whether to retain or replace the 50GB default volume and whether to remove the extra crashed `gym` service. No destructive cleanup has been performed.
