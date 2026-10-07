@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Forge</string>
+    <string name="title_activity_main">Forge</string>
+    <string name="package_name">com.forge.training</string>
+    <string name="custom_url_scheme">com.forge.training</string>
+    <string name="background_notification_title">Forge</string>
+    <string name="background_notification_description">Background health features are disabled in Forge.</string>
+    <string name="privacy_policy_url">https://gym-pwa-production-d169.up.railway.app/health-privacy.html</string>
+</resources>

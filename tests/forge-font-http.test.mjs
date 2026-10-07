@@ -24,6 +24,16 @@ test('local font and license assets are served with correct MIME types', async t
   assert.match(license.headers.get('content-type'), /text\/plain/);
   assert.match(await license.text(), /SIL OPEN FONT LICENSE Version 1\.1/);
 
+  const notices = await fetch(`${origin}/third-party-notices.html`);
+  assert.equal(notices.status, 200);
+  assert.match(notices.headers.get('content-type'), /text\/html/);
+  assert.match(await notices.text(), /Android Software Development Kit License/);
+
+  const apache = await fetch(`${origin}/licenses/Apache-2.0.txt`);
+  assert.equal(apache.status, 200);
+  assert.match(apache.headers.get('content-type'), /text\/plain/);
+  assert.match(await apache.text(), /Apache License[\s\S]*Version 2\.0, January 2004/);
+
   const gameCss = await fetch(`${origin}/forge-game.css`);
   assert.equal(gameCss.status, 200);
   assert.equal(gameCss.headers.get('content-type'), 'text/css');

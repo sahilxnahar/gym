@@ -142,6 +142,7 @@
     else updateLastSync();
   }
   async function resume() {
+    if (globalThis.FORGE_NATIVE_APP === true && globalThis.FORGE_NATIVE_ACCOUNT_SYNC !== true) { setStatus('Saved on this device · native account sync is not enabled'); return; }
     if (!app || !navigator.onLine) { if (app && !currentUser()) setStatus('Saved on this device'); return; }
     const mutation = app.getMutationCount?.() || 0;
     try {

@@ -1,6 +1,6 @@
 {
   "name": "forge-training-pwa",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "license": "AGPL-3.0-only",
   "description": "A local-first, beginner-friendly workout journal PWA from Forge.",
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server.mjs",
     "test": "node --test tests/*.test.mjs && npm run media:check",
-    "check": "node --check server.mjs && node --check public/app.js && node --check public/sw.js && node --check public/training.js && node --check public/forge-progress.js && node --check public/forge-tools.js && node --check public/forge-superset.js && node --check public/forge-reminders.js && node --check public/forge-sync.js && node --check public/forge-game.js && node --check public/supplement-library.js && node --check public/forge-cloud-sync.js && node --check public/forge-enhancements.js && node --check scripts/verify-media.mjs",
+    "check": "node --check server.mjs && node --check public/app.js && node --check public/sw.js && node --check public/training.js && node --check public/forge-progress.js && node --check public/forge-tools.js && node --check public/forge-superset.js && node --check public/forge-reminders.js && node --check public/forge-sync.js && node --check public/forge-game.js && node --check public/supplement-library.js && node --check public/forge-cloud-sync.js && node --check public/forge-enhancements.js && node --check public/forge-health.js && node --check public/forge-native-config.js && node --check public/forge-native-health.js && node --check mobile/src/health-data.mjs && node --check mobile/src/forge-native-health.mjs && node --check mobile/scripts/prepare-web.mjs && node --check scripts/verify-media.mjs",
     "media:check": "node scripts/verify-media.mjs",
     "media:manifest": "node scripts/verify-media.mjs --write-manifest",
     "dev": "PORT=4173 HOST=0.0.0.0 node server.mjs"

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "STEPS": "Read"
+  },
+  "disableBackgroundJobs": true,
+  "disableReadHealthDataHistory": true,
+  "privacyPolicyUrl": "https://gym-pwa-production-d169.up.railway.app/health-privacy.html",
+  "backgroundNotificationTitle": "Forge",
+  "backgroundNotificationDescription": "Background health features are disabled in Forge."
+}

@@ -36,7 +36,7 @@ test('all new interactive assets load locally and are included in offline precac
 test('the Training Ledger logo is used consistently across app, install icons and offline cache',()=>{
  const html=read('../public/index.html'),icon=read('../public/icon.svg'),sw=read('../public/sw.js'),manifest=JSON.parse(read('../public/manifest.webmanifest'));
  assert.match(icon,/aria-label="Forge Training Ledger"/);assert.ok(icon.includes('M31 98V24h49'),'app icon is missing the selected ledger mark');assert.ok(icon.includes('M78 79l8 8 17-21'),'app icon is missing the ember completion mark');
- assert.match(html,/href="\/icon\.svg"/);assert.deepEqual(manifest.icons.map(item=>item.src),['/icon-192.png','/icon-512.png']);assert.match(sw,/forge-v11-training-ledger-logo/);
+ assert.match(html,/href="\/icon\.svg"/);assert.deepEqual(manifest.icons.map(item=>item.src),['/icon-192.png','/icon-512.png']);assert.match(sw,/forge-v13-native-notices-levelup/);
  for(const path of ['/icon.svg','/icon-192.png','/icon-512.png'])assert.ok(sw.includes(`'${path}'`),`offline cache missing ${path}`);
  for(const [file,size] of [['icon-192.png',192],['icon-512.png',512]]){const png=readFileSync(new URL(`../public/${file}`,import.meta.url));assert.equal(png.readUInt32BE(16),size,`${file} width`);assert.equal(png.readUInt32BE(20),size,`${file} height`);}
 });

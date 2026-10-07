@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#24231f">
+  <meta name="description" content="How Forge handles optional, read-only daily step counts from Health Connect or Apple Health.">
+  <link rel="stylesheet" href="/forge-theme.css">
+  <link rel="stylesheet" href="/forge-health.css">
+  <title>Health-data privacy · Forge</title>
+</head>
+<body>
+  <main class="forge-health-privacy">
+    <a href="/">← Back to Forge</a>
+    <p class="tag">HEALTH DATA · OPTIONAL</p>
+    <h1>Health-data privacy</h1>
+    <p class="forge-privacy-lead">Forge connects to Android Health Connect or Apple Health only when you choose to read today’s step total in the native companion.</p>
+
+    <section>
+      <h2>What Forge asks to read</h2>
+      <ul>
+        <li><strong>Steps only:</strong> Forge requests read access to the <code>STEPS</code> record. It does not request write access.</li>
+        <li><strong>Today only:</strong> a query covers the current local day. Forge does not request permission to read older history.</li>
+        <li><strong>No background access:</strong> Forge does not create background jobs, health alerts or background health-data reads.</li>
+        <li><strong>No other health types:</strong> Forge does not request heart rate, sleep, weight, height, blood pressure, calories or other health records.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How the data is used</h2>
+      <p>The native companion displays the daily total you asked it to read. The value is kept temporarily in the current screen only. It is not saved to the workout journal, device storage, Forge account, analytics or server; it is not used for game XP, targets, coaching or workout selection.</p>
+      <p>You can use Forge without connecting a health service. A regular browser PWA cannot access Health Connect or HealthKit.</p>
+    </section>
+
+    <section>
+      <h2>Your choice and controls</h2>
+      <p>The permission prompt appears only after you tap the connect/refresh button. You can decline and continue using Forge. To revoke access later, use the Health Connect app’s app-permissions screen on Android, or Apple Health’s profile → Apps and Services settings on iPhone. You can also manage permissions from your device’s app settings.</p>
+    </section>
+
+    <section>
+      <h2>Important limits</h2>
+      <p>Step counts can be delayed, incomplete or different across devices and health services. Forge does not treat them as a medical measurement, safety signal or guaranteed activity record. Do not use the display for diagnosis or emergency decisions.</p>
+      <p>The Android/iOS companion is separate from the Forge browser PWA. Its current build is for testing; it is not yet an App Store or Play Store release. This notice describes the read-only integration and will be revised before any expansion of permissions or data use.</p>
+    </section>
+    <p class="help"><a href="/third-party-notices.html">Third-party software license notices</a></p>
+  </main>
+</body>
+</html>

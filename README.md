@@ -9,7 +9,7 @@ Forge is a local-first, gym-focused training PWA for planning a session, logging
 - Browse an offline exercise library with local movement GIFs and stills; filter by bodyweight, resistance bands, dumbbells or gym equipment.
 - Build an editable 1–7 day plan with 15–90 minute sessions, movement focus, gentle options and optional supersets. Quick workouts let you log a short bodyweight, band or walking session without rebuilding your plan.
 - Record workouts, sets, cardio, rest, bodyweight entries and unfinished sessions. A first-login merge keeps local and account journals together; later offline edits are merged or preserved as a clearly marked copy rather than silently overwritten.
-- See today's progress, lifetime points, levels, streaks and optional campaign missions on Home. Choose the Ground-Up Builder or Legacy Architect story; both share the same ranks, rewards and workouts, with no purchases or penalties.
+- See today's progress, lifetime points, levels, streaks and optional campaign missions on Home. The campaign includes a progress-to-tier bar and level-up reward notices. Choose the Ground-Up Builder or Legacy Architect story; both share the same ranks, rewards and workouts, with no purchases or penalties.
 - Set water, walking and supplement reminder schedules. Push notifications are opt-in **for each device**, use quiet hours/time zones and are best-effort, not guaranteed alarms. Page-based reminders only run while the app is open.
 - Read eight source-linked supplement summaries in the library. They explain evidence and cautions; Forge does not choose products, prescribe doses or screen medicines/interactions.
 - Use the optional adult BMI screening calculator and general activity suggestions. BMI is not a diagnosis, isn't saved, and never selects your workout load or goal.
@@ -23,6 +23,24 @@ Forge is a local-first, gym-focused training PWA for planning a session, logging
 4. Enable push reminders separately on any device that should receive them. The browser/OS asks separately on each device; denying permission does not affect account sync.
 
 Forge stores a password hash on the server, never the password in its workout journal. Use a unique password. Password change signs out other devices. Food notes stay device-local unless you explicitly enable account sync; BMI entries and notification permission are never synced. Do not put medical details in movement-limit notes.
+
+## Optional native Health Connect / Apple Health companion
+
+A browser PWA cannot read Health Connect or Apple Health. The separate `mobile/` Capacitor companion bundles the Forge interface locally and adds an optional, on-demand, **read-only total of today’s steps**. The person taps Connect/refresh before the OS permission prompt appears. Forge requests no other health types, write access, history or background access; a step count stays in transient screen state and is not stored, synced, used for XP, or required for any Forge feature. Read the public [health-data privacy note](public/health-privacy.html).
+
+Native account sync is deliberately deferred: use the HTTPS browser PWA for the existing owner email login and cross-device sync. This is a test/debug companion, not an App Store or Play Store release; the repository contains no distribution signing credentials.
+
+Android debug build (requires Node.js 24+, JDK 21 and Android SDK API 36):
+
+```sh
+cd mobile
+npm ci
+npm run android:debug
+```
+
+The APK is generated at `mobile/android/app/build/outputs/apk/debug/app-debug.apk`. The iOS project requires macOS/Xcode; from `mobile/`, run `npm ci`, `npm run sync:ios`, then `node scripts/run-capacitor.mjs open ios`. A physical iPhone build needs the HealthKit capability enabled for the signing team. Pull-request CI builds the Android debug APK and an unsigned iOS Simulator target.
+
+`run-capacitor.mjs` keeps Capacitor CLI preferences under the ignored repository-local `.work/tools/capacitor-home/` folder and disables CLI telemetry before native commands.
 
 ## Run locally
 

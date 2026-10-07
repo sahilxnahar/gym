@@ -1,0 +1,10 @@
+{
+  "appId": "com.forge.training",
+  "appName": "Forge",
+  "webDir": "www",
+  "server": {
+    "hostname": "localhost",
+    "androidScheme": "https",
+    "iosScheme": "https"
+  }
+}
