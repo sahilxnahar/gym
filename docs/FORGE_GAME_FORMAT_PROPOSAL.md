@@ -11,6 +11,13 @@ Use two equal-play routes:
 
 Both routes use the same workouts, XP, chapter unlocks, rewards, and effort. Neither route requires money, extra training, bodyweight targets, consecutive-day streaks, or a daily login. Switching routes changes story language only; it does not reset progress. I would not label the first route “slave.” It can sound degrading and controlling; “Ground-Up Builder” keeps the start-from-nothing idea while treating the player with respect.
 
+## Current implementation in Forge 0.6.0
+
+- Home shows the optional campaign, a progress-to-next-rank bar, one actionable mission and short-workout choices. Completing a real logged workout updates XP; crossing a tier threshold produces one brief level-up toast that names the new rank and reward.
+- Settings offers Ground-Up Builder and Legacy Architect as equal story routes. Switching changes story text only; workout options, point rules, unlocks and progress remain the same.
+- The map shows the current level gate, chapter path and what each next unlock represents. Ranks are Apprentice (1–2), Builder (3–4), Keeper (5–7), Warden (8–11), and Forge Master (12+).
+- There are no purchasable advantages, shame labels, lost-streak penalties, or workout/body-size gates. The game can encourage a next step, but does not guarantee increased energy or any health outcome.
+
 ## Game-format options
 
 | Format | Fit for Forge | Recommendation |

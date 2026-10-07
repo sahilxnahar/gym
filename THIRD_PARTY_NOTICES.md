@@ -27,3 +27,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+## Native companion dependency notices
+
+The native companion bundles `@capacitor/core`, `@capacitor/android` and `@capacitor/ios` 8.5.2 (MIT, Copyright 2017-present Drifty Co.) and `@capacitor/health-fitness` 1.0.1 plus `io.ionic.libs:ionhealthfitness-android` 1.0.1 (MIT, Copyright 2026 Ionic). Its Android runtime also includes AndroidX/Jetpack and Gson components under Apache License 2.0, plus Play Services Auth 19.2.0 and Location 19.0.1 whose Maven metadata identifies the separate Android Software Development Kit License. The built app includes an offline-accessible [third-party notice page](public/third-party-notices.html) and bundled [Apache License 2.0 text](public/licenses/Apache-2.0.txt). The web-push server dependency remains separately licensed under MPL-2.0 as described above.

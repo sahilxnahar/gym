@@ -34,3 +34,33 @@ test('rank tiers and short movement options remain activity-neutral', () => {
   assert.deepEqual(game.quickWorkouts.map(item => item.minutes), [3, 5, 7, 8]);
   assert.equal(game.snapshot(base).rank.title, 'Apprentice');
 });
+
+
+test('tier progress fills toward the next named rank and celebrates a level-up once', () => {
+  const workouts = Array.from({ length: 23 }, (_, index) => ({
+    id: `tier-${index}`,
+    finished: Date.now() - index * 60000,
+    exercises: []
+  }));
+  workouts[0].exercises = [{ id: 'practice-row', sets: Array.from({ length: 15 }, () => ({ done: true })) }];
+  const nearTier = { ...base, workouts };
+  const before = game.snapshot(nearTier);
+
+  assert.equal(before.xp, 1990);
+  assert.equal(before.level, 2);
+  assert.equal(before.rank.title, 'Apprentice');
+  assert.equal(before.nextRank.title, 'Builder');
+  assert.equal(before.rankProgress, 1990);
+  assert.equal(before.rankProgressMax, 2000);
+  assert.equal(before.xpToNextRank, 10);
+  assert.match(game.render(nearTier), /10 Forge XP to Builder/);
+
+  workouts[0].exercises[0].sets.push({ done: true });
+  const after = game.snapshot(nearTier);
+  assert.equal(after.xp, 2000);
+  assert.equal(after.level, 3);
+  assert.equal(after.rank.title, 'Builder');
+  assert.match(game.levelUpNotice(before, after), /LEVEL UP · Forge level 3 · Builder tier/);
+  assert.match(game.levelUpNotice(before, after), /Trail finder/);
+  assert.equal(game.levelUpNotice(after, before), null);
+});

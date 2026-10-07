@@ -76,11 +76,27 @@
     const realm = rewards[realmIndex];
     const next = rewards.find(reward => reward.level > level) || null;
     const rank = ranks.filter(item => item.level <= level).at(-1);
+    const nextRank = ranks.find(item => item.level > level) || null;
+    const xpPerLevel = globalThis.ForgeProgress.XP_PER_LEVEL;
+    const rankStartXp = (rank.level - 1) * xpPerLevel;
+    const rankTargetXp = nextRank ? (nextRank.level - 1) * xpPerLevel : xp;
+    const rankProgressMax = nextRank ? Math.max(1, rankTargetXp - rankStartXp) : 1;
+    const rankProgress = nextRank ? Math.max(0, Math.min(rankProgressMax, xp - rankStartXp)) : 0;
+    const xpToNextRank = nextRank ? Math.max(0, rankTargetXp - xp) : null;
     return {
-      xp, level, workouts: workouts.length, modeId, mode, rank, realm,
+      xp, level, workouts: workouts.length, modeId, mode, rank, nextRank, rankProgress, rankProgressMax, xpToNextRank, realm,
       chapter: mode.chapters[realmIndex], nextChapter: next ? mode.chapters[rewards.indexOf(next)] : null,
       next, rewards: rewards.filter(reward => reward.level <= level), quests, equipmentKinds: equipment.size
     };
+  }
+
+  function levelUpNotice(before, after) {
+    if (!before || !after || after.level <= before.level) return null;
+    const rankUp = before.rank?.title !== after.rank?.title;
+    const unlocked = (after.rewards || []).filter(reward => reward.level > before.level).map(reward => reward.title);
+    const tier = rankUp ? ` · ${after.rank.title} tier` : '';
+    const rewardText = unlocked.length ? ` New unlock${unlocked.length > 1 ? 's' : ''}: ${unlocked.join(', ')}.` : '';
+    return `LEVEL UP · Forge level ${after.level}${tier}.${rewardText}`;
   }
 
   function render(state) {
@@ -96,11 +112,14 @@
     const missionMarkup = featuredQuests.length
       ? featuredQuests.map(quest => `<div class="campaign-mission"><span><strong>${escapeHtml(quest.title)}</strong><small>${escapeHtml(quest.note)}</small></span><span class="mission-progress">${quest.progress}/${quest.target}</span></div>`).join('')
       : '<p class="campaign-clear">All current missions are complete. Pick any movement—or take a rest.</p>';
+    const tierProgress = data.nextRank
+      ? `<progress value="${data.rankProgress}" max="${data.rankProgressMax}" aria-label="Progress to ${escapeHtml(data.nextRank.title)} tier"></progress><small>${data.xpToNextRank.toLocaleString()} Forge XP to ${escapeHtml(data.nextRank.title)}</small>`
+      : '<small>Top tier reached · keep exploring at your own pace.</small>';
 
     return `<section class="forge-campaign-card card" aria-label="Forge story campaign">
       <div class="campaign-head">
         <div><span class="tag">OPTIONAL STORY · ${escapeHtml(data.mode.title.toUpperCase())}</span><h2>${escapeHtml(data.mode.title)}</h2><p>${escapeHtml(data.mode.summary)}</p></div>
-        <div class="campaign-rank"><span>YOUR TIER</span><strong>${escapeHtml(data.rank.title)}</strong><small>Level ${data.level}</small></div>
+        <div class="campaign-rank"><span>YOUR TIER</span><strong>${escapeHtml(data.rank.title)}</strong><small>Level ${data.level}</small>${tierProgress}</div>
       </div>
       <div class="campaign-chapter">
         <div class="campaign-chapter-copy"><span class="campaign-overline">CURRENT CHAPTER</span><h3>${escapeHtml(data.chapter.title)}</h3><p>${escapeHtml(data.chapter.note)}</p></div>
@@ -132,5 +151,5 @@
     return exercises.length ? { name: template.title, exercises } : null;
   }
 
-  globalThis.ForgeGame = Object.freeze({ quickWorkouts, modeOptions, modes, ranks, rewards, snapshot, render, renderMap, createQuickWorkout });
+globalThis.ForgeGame = Object.freeze({ quickWorkouts, modeOptions, modes, ranks, rewards, snapshot, levelUpNotice, render, renderMap, createQuickWorkout });
 })();

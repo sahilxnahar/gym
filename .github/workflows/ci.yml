@@ -30,3 +30,62 @@ jobs:
         run: npm test
       - name: Check JavaScript syntax
         run: npm run check
+
+  android:
+    name: Android debug companion
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+          cache-dependency-path: mobile/android/**/*.gradle
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Verify preinstalled Android SDK without accepting new licenses
+        run: |
+          test -d "$ANDROID_HOME/platforms/android-36"
+          test -d "$ANDROID_HOME/build-tools/36.0.0"
+          test -x "$ANDROID_HOME/platform-tools/adb"
+      - name: Install locked native dependencies
+        run: npm ci --prefix mobile
+      - name: Build debug companion
+        run: npm run android:debug --prefix mobile
+      - name: Verify merged manifest permission scope
+        run: python3 mobile/scripts/verify-android-manifest.py
+      - name: Upload debug APK for device testing
+        uses: actions/upload-artifact@v4
+        with:
+          name: Forge-Android-debug
+          path: mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+
+  ios:
+    name: iOS simulator companion
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Install locked native dependencies
+        run: npm ci --prefix mobile
+      - name: Build for iOS Simulator
+        run: |
+          npm run sync:ios --prefix mobile
+          xcodebuild -project mobile/ios/App/App.xcodeproj -scheme App -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build

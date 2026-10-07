@@ -9,6 +9,7 @@
   const allDays = () => [0, 1, 2, 3, 4, 5, 6];
   const emptyDiet = () => ({ pattern: 'none', note: '' });
   function user() { return app?.getUser?.() || null; }
+  function nativeLocalOnly() { return globalThis.FORGE_NATIVE_APP === true && globalThis.FORGE_NATIVE_ACCOUNT_SYNC !== true; }
   function state() { return app.getState(); }
   function persist() { app.save(); }
   function ensureDeviceId() {
@@ -58,15 +59,27 @@
 function renderHomeExtras() {
   const content = $('#content'), panel = document.createElement('div');
   const data = state();
+  const nativeOnly = nativeLocalOnly();
   panel.className = 'forge-home-extras'; panel.dataset.forgeEnhancement = 'home';
-  panel.innerHTML = `${globalThis.ForgeGame.render(data)}${quickWorkoutButtons(Boolean(data.active))}<section class="card forge-home-sync"><span class="tag">YOUR ACCOUNT</span><h2>${user() ? `Welcome back, ${esc(user().email)}` : 'Keep your progress with you'}</h2><p>${user() ? 'Your home page is using the account journal. Recent workouts, levels and reminders update here as soon as they sync.' : 'Use the same email login ID and password on each device to see the same workouts and progress. Each device keeps its own secure sign-in.'}</p>${user() ? '<button class="secondary" type="button" data-forge-action="sync-now">Sync now</button>' : '<button class="secondary" type="button" data-action="login">Sign in with email</button><button class="ghost" type="button" data-action="register">Create owner account</button>'}</section>`;
+  const accountText = user()
+    ? 'Your home page is using the account journal. Recent workouts, levels and reminders update here as soon as they sync.'
+    : nativeOnly
+      ? 'This native companion saves your training journal on this device for now. The browser PWA retains the existing email login and cross-device sync.'
+      : 'Use the same email login ID and password on each device to see the same workouts and progress. Each device keeps its own secure sign-in.';
+  const accountActions = user()
+    ? '<button class="secondary" type="button" data-forge-action="sync-now">Sync now</button>'
+    : nativeOnly
+      ? ''
+      : '<button class="secondary" type="button" data-action="login">Sign in with email</button><button class="ghost" type="button" data-action="register">Create owner account</button>';
+  panel.innerHTML = `${globalThis.ForgeGame.render(data)}${globalThis.ForgeHealth?.renderCard?.() || ''}${quickWorkoutButtons(Boolean(data.active))}<section class="card forge-home-sync"><span class="tag">YOUR ACCOUNT</span><h2>${user() ? `Welcome back, ${esc(user().email)}` : 'Keep your progress with you'}</h2><p>${accountText}</p>${accountActions}</section>`;
   const anchor = content.querySelector('.forge-start-card') || content.querySelector('.page-heading');
   if (anchor) anchor.insertAdjacentElement('afterend', panel); else content.append(panel);
 }
 function renderSettingsExtras() {
   const panel = document.createElement('div'), signedIn = user(), data = state();
   panel.className = 'forge-settings-extras'; panel.dataset.forgeEnhancement = 'settings';
-  panel.innerHTML = `<section class="card forge-account-card"><div class="forge-section-heading"><div><span class="tag">SYNC · SECURITY · BACKUPS</span><h2>Use Forge on all your devices</h2></div><span class="account-badge">${signedIn ? 'SIGNED IN' : 'LOCAL ONLY'}</span></div>${signedIn ? `<p>Signed in as <strong>${esc(signedIn.email)}</strong>. Use this email login ID and password on your phone to load the same journal. Passwords are never copied into workouts or backups.</p><div class="account-actions"><button class="secondary" type="button" data-forge-action="sync-now">Sync now</button><button class="ghost" type="button" data-action="logout">Sign out on this device</button><button class="ghost" type="button" data-forge-action="clear-device-copy">Remove this device's saved account copy</button></div><form id="forge-password-form"><h3>Change password</h3><label for="forge-current-password">Current password<input id="forge-current-password" type="password" autocomplete="current-password" required></label><label for="forge-new-password">New password · at least 12 characters<input id="forge-new-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label><label for="forge-confirm-password">Confirm new password<input id="forge-confirm-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label><p class="error" id="forge-password-error" role="alert"></p><button class="secondary" type="submit">Change password</button><p class="help">Other devices will need to sign in again after the change.</p></form>` : `<p>Forge saves to this device until you choose account sync. Once an owner account exists, sign in on each phone or computer with your email login ID and password. Your first sign-in merges local and account workouts instead of replacing either journal.</p><div class="account-actions"><button class="secondary" type="button" data-action="login">Sign in with email</button><button class="ghost" type="button" data-action="register">Create owner account</button></div>`}<details class="sync-data-explainer"><summary>What syncs, and what stays private?</summary><ul><li>Workouts, plans, bodyweight entries, settings, progress, quests and reminder schedules sync to the single-owner account.</li><li>Diet notes sync only if you explicitly switch them on in Tools.</li><li>BMI height and weight entries are used for the calculation and are not saved.</li><li>Passwords are hashed by the server and are never stored in the journal.</li><li>Notification permission is per device; enable it separately on each device.</li></ul></details><div class="forge-storage-meter" id="forge-storage-meter"><p>Account storage: checking…</p></div></section><section class="card forge-game-settings"><span class="tag">OPTIONAL GAME LAYER</span><h2>Choose your story route</h2><p>Pick the fantasy that motivates you. Both routes share the same workouts, Forge XP, ranks and rewards; only the story text changes. There is no purchase gate or lost progress.</p><fieldset class="forge-story-picker"><legend>Campaign story</legend><div class="forge-story-choices">${globalThis.ForgeGame.modeOptions.map(option => `<label class="forge-story-choice"><input type="radio" name="forge-game-mode" value="${esc(option.id)}" ${checked(option.id === (data.settings.gameMode || 'ground-up'))}><span><strong>${esc(option.title)}</strong><small>${esc(option.summary)}</small></span></label>`).join('')}</div></fieldset><p class="forge-story-note">Switch at any time. Your levels, completed missions and unlocked chapters stay exactly where they are.</p><label class="check-label"><input id="forge-adventure-enabled" type="checkbox" ${checked(data.settings.adventureMode !== false)}> Show quests, tiers and story rewards on Home</label><button type="button" class="ghost" data-forge-action="open-reminders">Manage reminders</button></section>`;
+  const nativeNotice = nativeLocalOnly() ? '<section class="card forge-native-account-note"><span class="tag">NATIVE COMPANION</span><h2>Account sign-in comes next</h2><p>This build keeps training local on this device. For the existing owner login and cross-device sync, use the Forge browser PWA. Your optional step total stays on this device.</p></section>' : '';
+  panel.innerHTML = `${nativeNotice}<section class="card forge-account-card"><div class="forge-section-heading"><div><span class="tag">SYNC · SECURITY · BACKUPS</span><h2>Use Forge on all your devices</h2></div><span class="account-badge">${signedIn ? 'SIGNED IN' : 'LOCAL ONLY'}</span></div>${signedIn ? `<p>Signed in as <strong>${esc(signedIn.email)}</strong>. Use this email login ID and password on your phone to load the same journal. Passwords are never copied into workouts or backups.</p><div class="account-actions"><button class="secondary" type="button" data-forge-action="sync-now">Sync now</button><button class="ghost" type="button" data-action="logout">Sign out on this device</button><button class="ghost" type="button" data-forge-action="clear-device-copy">Remove this device's saved account copy</button></div><form id="forge-password-form"><h3>Change password</h3><label for="forge-current-password">Current password<input id="forge-current-password" type="password" autocomplete="current-password" required></label><label for="forge-new-password">New password · at least 12 characters<input id="forge-new-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label><label for="forge-confirm-password">Confirm new password<input id="forge-confirm-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label><p class="error" id="forge-password-error" role="alert"></p><button class="secondary" type="submit">Change password</button><p class="help">Other devices will need to sign in again after the change.</p></form>` : `<p>Forge saves to this device until you choose account sync. Once an owner account exists, sign in on each phone or computer with your email login ID and password. Your first sign-in merges local and account workouts instead of replacing either journal.</p><div class="account-actions"><button class="secondary" type="button" data-action="login">Sign in with email</button><button class="ghost" type="button" data-action="register">Create owner account</button></div>`}<details class="sync-data-explainer"><summary>What syncs, and what stays private?</summary><ul><li>Workouts, plans, bodyweight entries, settings, progress, quests and reminder schedules sync to the single-owner account.</li><li>Diet notes sync only if you explicitly switch them on in Tools.</li><li>BMI height and weight entries are used for the calculation and are not saved.</li><li>Passwords are hashed by the server and are never stored in the journal.</li><li>Notification permission is per device; enable it separately on each device.</li></ul></details><div class="forge-storage-meter" id="forge-storage-meter"><p>Account storage: checking…</p></div></section><section class="card forge-game-settings"><span class="tag">OPTIONAL GAME LAYER</span><h2>Choose your story route</h2><p>Pick the fantasy that motivates you. Both routes share the same workouts, Forge XP, ranks and rewards; only the story text changes. There is no purchase gate or lost progress.</p><fieldset class="forge-story-picker"><legend>Campaign story</legend><div class="forge-story-choices">${globalThis.ForgeGame.modeOptions.map(option => `<label class="forge-story-choice"><input type="radio" name="forge-game-mode" value="${esc(option.id)}" ${checked(option.id === (data.settings.gameMode || 'ground-up'))}><span><strong>${esc(option.title)}</strong><small>${esc(option.summary)}</small></span></label>`).join('')}</div></fieldset><p class="forge-story-note">Switch at any time. Your levels, completed missions and unlocked chapters stay exactly where they are.</p><label class="check-label"><input id="forge-adventure-enabled" type="checkbox" ${checked(data.settings.adventureMode !== false)}> Show quests, tiers and story rewards on Home</label><button type="button" class="ghost" data-forge-action="open-reminders">Manage reminders</button></section>`;
   $('#content').append(panel);
   if (signedIn) loadStorageMeter();
   }
@@ -110,8 +123,9 @@ function renderSettingsExtras() {
     if (currentPage === 'home') renderHomeExtras();
     if (currentPage === 'tools') renderToolsExtras();
     if (currentPage === 'settings') renderSettingsExtras();
+    if (nativeLocalOnly()) document.querySelectorAll('[data-action="login"], [data-action="register"]').forEach(button => { button.hidden = true; });
     const syncButton = $('#sync-now-header');
-    if (syncButton) syncButton.hidden = !user();
+    if (syncButton) syncButton.hidden = !user() || nativeLocalOnly();
     if (currentPage === 'tools') localReminderTick();
   }
   function readDays(prefix) { return [...document.querySelectorAll(`input[name="${prefix}-day"]:checked`)].map(input => Number(input.value)); }
@@ -227,8 +241,22 @@ function renderSettingsExtras() {
     } catch (failure) { error.textContent = failure.message; }
     finally { button.disabled = false; }
   }
+  async function readHealthToday() {
+    const task = globalThis.ForgeHealth?.readToday?.();
+    if (!task) return;
+    app.render();
+    const ok = await task;
+    app.render();
+    if (!ok) app.toast('No step data was read. Forge works without connecting.');
+  }
   function handleClick(event) {
     const button = event.target.closest('button'); if (!button) return;
+    if (nativeLocalOnly() && ['login', 'register'].includes(button.dataset.action)) {
+      event.preventDefault(); event.stopImmediatePropagation();
+      const url = esc(globalThis.FORGE_WEB_APP_URL || 'https://gym-pwa-production-d169.up.railway.app/');
+      app.modal('Sign in through the Forge browser PWA', `<p>Account sign-in and cross-device sync are intentionally paused in this native companion. Open <a href="${url}" target="_blank" rel="noopener noreferrer">Forge in your browser</a> to use the owner login. Local workouts and optional step display remain available here.</p>`);
+      return;
+    }
     const quick = button.dataset.forgeQuick;
     if (quick) { event.preventDefault(); event.stopImmediatePropagation(); startQuickWorkout(quick); return; }
     const action = button.dataset.forgeAction;
@@ -239,6 +267,7 @@ function renderSettingsExtras() {
       if (action === 'quick-menu') openQuickMenu();
       if (action === 'open-reminders') { app.setPage('tools'); app.render(); document.querySelector('#forge-reminders')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       if (action === 'enable-push') enableNotifications();
+      if (action === 'connect-health') readHealthToday();
       if (action === 'add-supplement-reminder') openSupplementReminder();
       if (action === 'save-food-sync') saveFoodSync();
       if (action === 'clear-device-copy') clearDeviceCopy();
