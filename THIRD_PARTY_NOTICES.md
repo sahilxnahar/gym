@@ -4,6 +4,8 @@ FORGE includes English exercise metadata and written instruction text from the d
 
 Forge also adapts OpenGym superset-ordering helpers. See [OPEN_GYM_ATTRIBUTION.md](OPEN_GYM_ATTRIBUTION.md) for exact files, commit and the AGPLv3 source notice. No Gym Visual/AscendAPI thumbnails, third-party animations or OpenGym media are included. Forge’s schematic GIFs and resistance-band illustration are original. Exercise text is general reference material and has not undergone individualized clinical review.
 
+`web-push` is an installed runtime dependency used for opt-in notifications; its package is licensed under the Mozilla Public License 2.0 (MPL-2.0). Forge does not copy its source. See the [upstream license](https://github.com/web-push-libs/web-push/blob/master/LICENSE) and the version pinned in `package-lock.json`.
+
 MIT License
 
 Copyright (c) 2026 Hasan Emir Yıldırım

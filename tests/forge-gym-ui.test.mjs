@@ -23,9 +23,9 @@ test('BMI is optional, explicitly adult-gated and separated from load planning',
  assert.match(trainingSource(),/Bodyweight and height are not used to choose your exercise weight/);
 });
 function trainingSource(){return read('../public/training.js')}
-test('diet reminders are marked local-only and not part of sync or backup',()=>{
- const app=read('../public/app.js'),tools=read('../public/forge-tools.js');
- assert.match(app,/not included in backups or account sync/);assert.match(tools,/forge-diet-preferences-v1/);
+test('diet notes are device-only by default and require explicit account-sync consent',()=>{
+ const app=read('../public/app.js'),tools=read('../public/forge-tools.js'),enhancements=read('../public/forge-enhancements.js');
+ assert.match(app,/stay on this device by default and are not included in backups/);assert.match(enhancements,/device-only by default/);assert.match(enhancements,/If you opt in, the current dietary pattern and free-text note sync/);assert.match(tools,/forge-diet-preferences-v1/);
 });
 test('all new interactive assets load locally and are included in offline precache',()=>{
  const html=read('../public/index.html'),app=read('../public/app.js'),sw=read('../public/sw.js'),audit=read('../scripts/verify-media.mjs');

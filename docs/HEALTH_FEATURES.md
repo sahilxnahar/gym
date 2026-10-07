@@ -21,7 +21,8 @@ Forge is a workout journal and exercise finder. These features offer general inf
 
 - Cardio suggestions cover walking, cycling, swimming or water exercise, dance, rowing, seated movement, and steps/hills. The simple “talk test” wording is a general pacing cue, not a heart-rate prescription.
 - Forge cites the CDC's adult guideline of 150 minutes of moderate aerobic activity per week plus muscle strengthening on two or more days as **general information**, not a personalized target. Any activity should be adapted to the person; comfortable movement is encouraged without making the guideline a pass/fail goal.
-- Food preference and reminder fields are optional and stored under a separate browser-local key. They do not enter the workout journal, account sync or backup. Forge does not provide meal plans, calories, macros, medical diet guidance, or an allergy-safety guarantee. Users are told not to store sensitive clinical details in the note.
+- Food preference/reminder notes stay in a separate browser-local key by default. An explicit opt-in can sync them to the single-owner account; BMI entries remain transient and are never saved, synced or backed up. Forge does not provide meal plans, calories, macros, medical diet guidance or an allergy-safety guarantee. Do not put private clinical details in the note.
+- The eight-card supplement library summarizes selected government/sports-science sources with limitations; it does not recommend a product, dose, stack or treatment. Supplement reminders contain only a user-written label and time. See [`SUPPLEMENT_LIBRARY.md`](SUPPLEMENT_LIBRARY.md); ask a clinician or pharmacist about personal medicine/supplement interactions.
 
 ## Apple Health
 

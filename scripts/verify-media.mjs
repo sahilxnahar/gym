@@ -131,11 +131,12 @@ const html = await readFile(path.join(publicDir, 'index.html'), 'utf8');
 assert(app.includes('/demos/${key}.${paused?\'png\':\'gif\'}'), 'The exercise guide does not point to the local GIF/still files');
 assert(serviceWorker.includes("['squat','pushup','row','hinge','bridge','deadbug']"), 'The service worker demo list does not match the six supplied guides');
 assert(serviceWorker.includes("'/forge-progress.js'") && serviceWorker.includes("'/media-manifest.json'"), 'The service worker does not precache the progress module and media manifest');
-for (const asset of ['/forge-tools.js', '/forge-superset.js', '/forge-extras.css', '/equipment/resistance-band-set.svg']) {
+for (const asset of ['/forge-tools.js', '/forge-superset.js', '/forge-reminders.js', '/forge-sync.js', '/forge-game.js', '/supplement-library.js', '/forge-cloud-sync.js', '/forge-enhancements.js', '/forge-extras.css', '/forge-productivity.css', '/equipment/resistance-band-set.svg']) {
   assert((asset.endsWith('.svg') ? app : html).includes(asset), `The app shell or Tools template does not load ${asset}`);
   assert(serviceWorker.includes(`'${asset}'`), `The service worker does not precache ${asset}`);
 }
-const bandIllustration = await readFile(path.join(publicDir, 'equipment/resistance-band-set.svg'), 'utf8');
+const bandBytes = await readFile(path.join(publicDir, 'equipment/resistance-band-set.svg'));
+const bandIllustration = bandBytes.toString('utf8');
 assert(bandIllustration.startsWith('<svg '), 'The Forge resistance-band illustration is missing or invalid');
 assert(html.includes('/forge-progress.js'), 'The app shell does not load the local progression module');
 
@@ -143,6 +144,7 @@ const report = {
   schemaVersion: 1,
   sourceArchive: 'forge-source.zip (movement media) and FitQuest-complete.zip (audited; reference preview only)',
   note: 'The Forge archive supplies six local movement GIFs and matching stills. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.',
+  equipmentIllustrations: [{ file: '/equipment/resistance-band-set.svg', bytes: bandBytes.length, sha256: sha256(bandBytes), source: 'Original Forge vector inspired by the user-supplied resistance-band product reference; no retailer branding or screenshot included.' }],
   gifs: media.gifFiles,
   stillFrames: media.stillFiles,
   videos: media.videos

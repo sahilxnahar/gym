@@ -1,5 +1,14 @@
 .git
+.work
 .env
+.env.*
+!.env.example
 data
+*.sqlite
+*.sqlite-*
+*.db
 node_modules
 playwright-results
+coverage
+*.log
+.DS_Store
