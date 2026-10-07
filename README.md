@@ -13,7 +13,7 @@ Forge is a local-first, gym-focused training PWA for planning a session, logging
 - Set water, walking and supplement reminder schedules. Push notifications are opt-in **for each device**, use quiet hours/time zones and are best-effort, not guaranteed alarms. Page-based reminders only run while the app is open.
 - Read eight source-linked supplement summaries in the library. They explain evidence and cautions; Forge does not choose products, prescribe doses or screen medicines/interactions.
 - Use the optional adult BMI screening calculator and general activity suggestions. BMI is not a diagnosis, isn't saved, and never selects your workout load or goal.
-- Choose warm, charcoal or high-contrast appearance, equipment, availability, workout time, body focus and optional synced food notes. Forge uses one self-hosted Barlow type family throughout the interface.
+- Choose warm, charcoal or high-contrast appearance, equipment, availability, workout time, body focus and optional synced food notes. Forge uses one self-hosted Barlow type family throughout the interface. The Training Ledger mark—a session record with an ember completion point—appears in the app shell and install icons.
 
 ## Use the same account on a phone and laptop
 
