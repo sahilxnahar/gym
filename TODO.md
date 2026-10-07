@@ -1,9 +1,10 @@
-# Gym PWA outcomes
+# Forge quality backlog
 
-- [x] Build the mobile-first installable PWA from the supplied Forge app, adding FitQuest-style progress and license-reviewed patterns from all ten reference repositories.
-- [x] Preserve workouts, routines, exercise search, rest timer, history, offline data, and accessibility; add real-data XP, level, streak, milestones, and quick log.
-- [x] Verify six GIFs, six stills, 192 animated frames, local/offline references, and no video files in either supplied archive.
-- [x] Commit and push the complete project to `sahilxnahar/Gym` on `main`; preserve the existing GNU GPL version 3 license.
-- [x] Create Railway project `Gym`, connect the PWA service, and verify the public homepage and `/health` endpoint.
-- [ ] Owner review: decide whether to retain or replace the 50GB default volume and whether to remove the extra crashed `gym` service. No destructive cleanup has been performed.
-- [x] Delete only the extra crashed `gym` service as requested; retain the 50GB default volume.
+These are optional follow-ups, not blockers to the current release. The interface review in `docs/FORGE_UX_REDESIGN.md` explains the order and rationale.
+
+- [ ] Run moderated beginner usability sessions with people who are new to strength training; record where they hesitate and revise plain-language copy.
+- [ ] Complete 360–390 px, keyboard-only, VoiceOver and TalkBack checks for each main flow.
+- [ ] Ask a qualified coach to review the movement cues and age-related defaults before expanding progression advice.
+- [ ] Add favorites and a clear filter summary to the offline movement library.
+- [ ] Add localization only after the complete logging flow and movement cues can be translated together.
+- [ ] Consider a native iOS companion only if direct Apple Health integration becomes a requirement; the browser PWA cannot access HealthKit directly.

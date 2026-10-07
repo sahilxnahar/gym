@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Forge resistance-band kit illustration</title>
+  <desc id="desc">An original line illustration of colored resistance tubes, foam handles, a door anchor and ankle straps.</desc>
+  <defs>
+    <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#fffdf8"/><stop offset="1" stop-color="#eee8dc"/></linearGradient>
+    <filter id="shadow" x="-.2" y="-.2" width="1.4" height="1.5"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#292822" flood-opacity=".14"/></filter>
+  </defs>
+  <rect x="8" y="8" width="624" height="344" rx="22" fill="url(#paper)" stroke="#d8d2c7"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)">
+    <path d="M126 94 C82 134 85 221 124 261" stroke="#31302b" stroke-width="12"/>
+    <path d="M154 86 C114 134 116 223 153 269" stroke="#48634f" stroke-width="12"/>
+    <path d="M183 80 C148 132 149 228 182 276" stroke="#5483b8" stroke-width="12"/>
+    <path d="M212 78 C183 132 183 228 211 278" stroke="#df6548" stroke-width="12"/>
+    <path d="M241 82 C217 133 217 225 240 274" stroke="#e4b83c" stroke-width="12"/>
+    <path d="M126 261 l10 19 15-4 5-7 M154 269 l10 18 15-4 5-7 M183 276 l10 18 15-4 5-7 M212 278 l10 18 15-4 5-7 M241 274 l10 18 15-4 5-7" stroke="#393831" stroke-width="5"/>
+    <path d="M274 286 h86 q12 0 12 12 v7 q0 12-12 12 h-86 q-12 0-12-12 v-7 q0-12 12-12Z" fill="#292822" stroke="#171714" stroke-width="3"/>
+    <path d="M268 300 h98" stroke="#6f6b60" stroke-width="2"/>
+    <path d="M420 282 h59 q10 0 10 10 v14 q0 10-10 10 h-59 q-10 0-10-10 v-14 q0-10 10-10Z" fill="#f3f0e8" stroke="#393831" stroke-width="5"/>
+    <path d="M427 289 v21 M440 289 v21 M453 289 v21 M466 289 v21" stroke="#bab3a6" stroke-width="2"/>
+    <path d="M494 140 h45 q12 0 12 12 v48 q0 12-12 12 h-45 q-12 0-12-12 v-48 q0-12 12-12Z" fill="#292822" stroke="#171714" stroke-width="3"/>
+    <path d="M503 140 v-12 q0-12 13-12 h1 q13 0 13 12 v12 M496 158 h41 M496 171 h41 M496 184 h41" stroke="#5e5a50" stroke-width="3"/>
+    <circle cx="522" cy="229" r="5" fill="#df6a47" stroke="none"/>
+    <path d="M477 281 C490 266 503 260 514 252" stroke="#393831" stroke-width="5"/>
+  </g>
+  <text x="44" y="43" fill="#8b4029" font-family="system-ui,sans-serif" font-size="12" font-weight="800" letter-spacing="2">FORGE / TRAIN ANYWHERE</text>
+  <text x="44" y="322" fill="#625f58" font-family="system-ui,sans-serif" font-size="11">Tubes · handles · anchor · ankle straps</text>
+</svg>

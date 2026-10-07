@@ -1,8 +1,8 @@
 # Third-party metadata
 
-FORGE imports only English exercise metadata and written instruction text from the exercises dataset represented in OpenGym at commit `31c6795b40fb54130192b5016d7dc29e9f457d30`. Dataset: https://github.com/hasaneyldrm/exercises-dataset; original content: ExerciseDB v1 / AscendAPI (https://exercisedb.dev/). OpenGym provenance notice: https://github.com/DuarteSantos8/openGym/blob/main/NOTICE.md. The metadata is distributed there under the MIT terms below.
+FORGE includes English exercise metadata and written instruction text from the dataset represented in OpenGym at commit `31c6795b40fb54130192b5016d7dc29e9f457d30`. Dataset: https://github.com/hasaneyldrm/exercises-dataset; original content: ExerciseDB v1 / AscendAPI (https://exercisedb.dev/). OpenGym provenance notice: https://github.com/DuarteSantos8/openGym/blob/main/NOTICE.md. The metadata is distributed under the separate MIT terms below.
 
-No OpenGym application code, translations, Gym Visual/AscendAPI thumbnails or third-party animations are included. FORGE movement diagrams and planning logic are original. Imported instruction text is general reference material and has not undergone individualized clinical review.
+Forge also adapts OpenGym superset-ordering helpers. See [OPEN_GYM_ATTRIBUTION.md](OPEN_GYM_ATTRIBUTION.md) for exact files, commit and the AGPLv3 source notice. No Gym Visual/AscendAPI thumbnails, third-party animations or OpenGym media are included. Forge’s schematic GIFs and resistance-band illustration are original. Exercise text is general reference material and has not undergone individualized clinical review.
 
 MIT License
 

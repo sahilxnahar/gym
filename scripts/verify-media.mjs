@@ -131,6 +131,12 @@ const html = await readFile(path.join(publicDir, 'index.html'), 'utf8');
 assert(app.includes('/demos/${key}.${paused?\'png\':\'gif\'}'), 'The exercise guide does not point to the local GIF/still files');
 assert(serviceWorker.includes("['squat','pushup','row','hinge','bridge','deadbug']"), 'The service worker demo list does not match the six supplied guides');
 assert(serviceWorker.includes("'/forge-progress.js'") && serviceWorker.includes("'/media-manifest.json'"), 'The service worker does not precache the progress module and media manifest');
+for (const asset of ['/forge-tools.js', '/forge-superset.js', '/forge-extras.css', '/equipment/resistance-band-set.svg']) {
+  assert((asset.endsWith('.svg') ? app : html).includes(asset), `The app shell or Tools template does not load ${asset}`);
+  assert(serviceWorker.includes(`'${asset}'`), `The service worker does not precache ${asset}`);
+}
+const bandIllustration = await readFile(path.join(publicDir, 'equipment/resistance-band-set.svg'), 'utf8');
+assert(bandIllustration.startsWith('<svg '), 'The Forge resistance-band illustration is missing or invalid');
 assert(html.includes('/forge-progress.js'), 'The app shell does not load the local progression module');
 
 const report = {
