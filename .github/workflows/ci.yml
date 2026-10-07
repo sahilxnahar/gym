@@ -33,7 +33,7 @@ jobs:
 
   android:
     name: Android debug companion
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - name: Check out source
@@ -51,12 +51,13 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: mobile/package-lock.json
-      - name: Install Android SDK tools
-        uses: android-actions/setup-android@v3
+      - name: Verify preinstalled Android SDK without accepting new licenses
+        run: |
+          test -d "$ANDROID_HOME/platforms/android-36"
+          test -d "$ANDROID_HOME/build-tools/36.0.0"
+          test -x "$ANDROID_HOME/platform-tools/adb"
       - name: Install locked native dependencies
         run: npm ci --prefix mobile
-      - name: Install Android 36 platform
-        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
       - name: Build debug companion
         run: npm run android:debug --prefix mobile
       - name: Verify merged manifest permission scope
