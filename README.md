@@ -7,7 +7,7 @@ Forge is a local-first, gym-focused training PWA for planning a session, logging
 ## What you can do
 
 - Browse an offline exercise library with local movement GIFs and stills; filter by bodyweight, resistance bands, dumbbells or gym equipment.
-- Build an editable 1–7 day plan with 15–90 minute sessions, movement focus, gentle options and optional supersets. Home highlights 3- and 5-minute no-equipment bodyweight sessions with local movement previews; short band and walking options are available too.
+- Build an editable 1–7 day plan with 15–90 minute sessions, movement focus, gentle options and optional supersets. Home highlights 3- and 5-minute no-equipment sessions, previews all six local movement guides with equipment needs labeled, and offers short band and walking options.
 - Record workouts, sets, cardio, rest, bodyweight entries and unfinished sessions. A first-login merge keeps local and account journals together; later offline edits are merged or preserved as a clearly marked copy rather than silently overwritten.
 - See today's progress, lifetime points, levels, streaks and optional campaign missions on Home. The campaign includes a progress-to-tier bar and level-up reward notices. Choose the Ground-Up Builder or Legacy Architect story; both share the same ranks, rewards and workouts, with no purchases or penalties.
 - Set optional at-home workout, water, walking and supplement reminders. The home-workout nudge gives one simple movement idea at a chosen time/day. Push notifications are opt-in **for each device**, respect quiet hours/time zones and are best-effort, not guaranteed alarms. Page-based reminders only run while the app is open.
@@ -73,7 +73,7 @@ npm run check
 npm run media:check
 ```
 
-The media verifier checks image signatures, GIF animation, dimensions, hashes and service-worker precache coverage. Six movement GIFs and six stills are bundled locally; neither supplied source archive contained video. Forge also includes its own resistance-band SVG. The FitQuest preview image is a reference only, not runtime media. See the [media inventory](docs/MEDIA_INVENTORY.md).
+The media verifier checks image signatures, GIF animation, dimensions, hashes and service-worker precache coverage. Six full movement GIFs, six stills and six lightweight Home preview GIFs are bundled locally and cached offline; neither supplied source archive contained video. Forge also includes its own resistance-band SVG. The FitQuest preview image is a reference only, not runtime media. See the [media inventory](docs/MEDIA_INVENTORY.md).
 
 Further references: [sync and notification behavior](docs/SYNC_AND_NOTIFICATIONS.md), [game-format proposal and evidence](docs/FORGE_GAME_FORMAT_PROPOSAL.md), [15GB storage limit](docs/STORAGE_LIMIT.md), [physical 15GB Railway volume migration plan](docs/RAILWAY_15GB_MIGRATION_PLAN.md), [supplement library and sources](docs/SUPPLEMENT_LIBRARY.md), [health boundaries](docs/HEALTH_FEATURES.md), [interface review and prioritized improvement ideas](docs/FORGE_UX_REDESIGN.md), [usability test plan](docs/UX_TEST_PLAN.md), [all ten repository references](docs/REFERENCE_REVIEW.md), and [OpenGym file-level attribution](OPEN_GYM_ATTRIBUTION.md).
 

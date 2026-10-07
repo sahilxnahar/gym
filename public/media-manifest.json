@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceArchive": "forge-source.zip (movement media) and FitQuest-complete.zip (audited; reference preview only)",
-  "note": "The Forge archive supplies six local movement GIFs and matching stills. Three reduced-size Home preview GIFs are derived from those local originals. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.",
+  "note": "The Forge archive supplies six local movement GIFs and matching stills. Six reduced-size Home preview GIFs are derived from those local originals. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.",
   "equipmentIllustrations": [
     {
       "file": "/equipment/resistance-band-set.svg",
@@ -80,10 +80,37 @@
       "frames": 32
     },
     {
+      "file": "/demos/previews/row-preview.gif",
+      "bytes": 110088,
+      "sha256": "d10ac5fc36696150ba734ccc27ae9415860eb6b059bd9fe9a6048b1088f2cc99",
+      "derivedFrom": "/demos/row.gif",
+      "width": 180,
+      "height": 141,
+      "frames": 32
+    },
+    {
+      "file": "/demos/previews/hinge-preview.gif",
+      "bytes": 94509,
+      "sha256": "226c4e3520391c05d113f62d4bb2a0edc65ea5e167e5d7af21a11110d6acb049",
+      "derivedFrom": "/demos/hinge.gif",
+      "width": 180,
+      "height": 141,
+      "frames": 32
+    },
+    {
       "file": "/demos/previews/bridge-preview.gif",
       "bytes": 98218,
       "sha256": "7a14010a5d0f599f084ea7cbbb3a82b69ca928a0957905a11f098750bdac2f64",
       "derivedFrom": "/demos/bridge.gif",
+      "width": 180,
+      "height": 141,
+      "frames": 32
+    },
+    {
+      "file": "/demos/previews/deadbug-preview.gif",
+      "bytes": 97980,
+      "sha256": "792c88ff43dc96fd8d1651cc57b540f3706dfb1f99f722d6a15b0061c64fdf94",
+      "derivedFrom": "/demos/deadbug.gif",
       "width": 180,
       "height": 141,
       "frames": 32
