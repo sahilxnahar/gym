@@ -1,0 +1,28 @@
+# Reference review
+
+Reviewed all ten user-provided repositories against the requested workout PWA. The app adopts transferable product patterns and does not bundle code, branding, screenshots, GIFs, or videos from those external repositories. A public repository is not automatically permission to reuse its contents.
+
+## What influenced the app
+
+The core is a mobile-first, local-first workout journal with a short route from routine or exercise discovery into set logging, rest timing, session completion, and progress. That combines patterns found in [DuarteSantos8/openGym](https://github.com/DuarteSantos8/openGym), [InlitX/GymMane](https://github.com/InlitX/GymMane), and [chathushkaimasara/My-Workouts](https://github.com/chathushkaimasara/My-Workouts). The supplied Forge code already provides sessions, routines, a searchable exercise catalogue, rest timer, history, progress, local storage, export/import, PWA metadata, and offline movement guides. FitQuest contributes the lighter “XP / streak / milestone” feedback layer; the delivered progress view derives rewards from the user's actual completed sessions and sets rather than sample history.
+
+The supplied Forge exercise records draw on [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset). Its repository distinguishes MIT-licensed metadata/instruction text from its `images/` and `videos/` media, which are excluded from that license and attributed to Gym Visual. The Gym app retains the provided MIT notice and does not copy those upstream third-party images/videos. Its six schematic GIFs and six still frames come from the user-supplied Forge archive and are kept as local files for offline use.
+
+## Repository-by-repository assessment
+
+- [openai/gym](https://github.com/openai/gym) is an archived Python reinforcement-learning toolkit, not a fitness app. The reusable idea is a clear workout lifecycle/state machine; the code is MIT-licensed, but bundled MuJoCo assets have separate terms.
+- [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) provides structured exercise metadata and instructions plus a browser search/filter pattern. Its MIT notice covers data/code described by the license, not the separate Gym Visual images/videos; those assets were not copied.
+- [InlitX/GymMane](https://github.com/InlitX/GymMane) is an offline-first Android tracker with a muscle map, routines, rest timer, progress and streaks. Its code is GPL-3.0-only with an additional attribution condition; credited workout art is CC BY-SA 4.0. No code or art was copied.
+- [chathushkaimasara/My-Workouts](https://github.com/chathushkaimasara/My-Workouts) is a Flutter workout planner with local persistence, routine editing, PRs, charts and backup/restore. Source is MIT-licensed; bundled fonts/assets have separate license/provenance considerations. No code or media was copied.
+- [furkankayam/fullstack-gym-iot-app](https://github.com/furkankayam/fullstack-gym-iot-app) is a React/Spring/MQTT/ESP32 membership and check-in system. Its repository code is MIT-licensed, but NFC access, occupancy and membership administration are outside this personal workout-journal scope. No code or assets were copied.
+- [xScherpschutter/ActioLift](https://github.com/xScherpschutter/ActioLift) is a Wails/Go/Preact desktop POS and gym-membership manager with SQLite, not a workout PWA. The repository has an MIT license; dependency and asset rights remain separate. No code or assets were copied.
+- [faeztgh/ANDROID-GymApp](https://github.com/faeztgh/ANDROID-GymApp) is a Java Android app for courses, profiles and reviews. No project license was found, so reuse rights are not granted by public visibility. No code or assets were copied.
+- [wesleyyan-sb/masscience](https://github.com/wesleyyan-sb/masscience) is a bodyweight/nutrition tracker with trend estimates and local persistence. The repository identifies its work as CC0, but dependencies and third-party assets may differ. Its uncertainty-aware progress presentation is adjacent inspiration; calorie-control features were not added.
+- [Kyrillos-Samy1/Gymo](https://github.com/Kyrillos-Samy1/Gymo) is a React exercise-discovery app with animated previews. Its MIT file conflicts with a README noncommercial restriction and media rights are unclear. No code, GIF, video, branding or embedded tutorial was copied.
+- [DuarteSantos8/openGym](https://github.com/DuarteSantos8/openGym) is the closest product reference: a self-hosted fitness PWA with offline logging, guided sessions, progression and conflict-aware sync. Its code is AGPL-3.0-or-later; the repository itself identifies separate exercise-media ownership and permission issues. No OpenGym app code or media was copied.
+
+## Reuse and scope notes
+
+The delivered app uses the user-supplied Forge source, the user-supplied FitQuest prototype as a product reference, and the Forge archive's existing exercise metadata and original movement diagrams. It does not silently merge ten different codebases. Gym administration, POS, NFC/IoT occupancy, Android-only course screens, reinforcement-learning environments, and nutrition/calorie prescriptions are not part of this workout-journal release. Check each linked repository's current license and asset notices before any future reuse; this summary is a technical review, not legal advice.
+
+The exact target repository was verified as [sahilxnahar/Gym](https://github.com/sahilxnahar/Gym). It already contains a GNU GPL version 3 `LICENSE`; that file was preserved for this upload. This repository license applies independently of the exercise dataset's MIT notice and the Forge demo-media provenance above.

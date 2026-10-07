@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "sourceArchive": "forge-source.zip (movement media) and FitQuest-complete.zip (audited; reference preview only)",
+  "note": "The Forge archive supplies six local movement GIFs and matching stills. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.",
+  "gifs": [
+    {
+      "file": "/demos/squat.gif",
+      "bytes": 441738,
+      "sha256": "148f264ba266e198c90ede18043ce3e53016c74aeea42abced183b333aeff8d8",
+      "width": 512,
+      "height": 400,
+      "frames": 32
+    },
+    {
+      "file": "/demos/pushup.gif",
+      "bytes": 468247,
+      "sha256": "cb0912a9665cb7747a06fec78d62e57bc0d9b763f171e3dcf522fbbfcda10bed",
+      "width": 512,
+      "height": 400,
+      "frames": 32
+    },
+    {
+      "file": "/demos/row.gif",
+      "bytes": 544313,
+      "sha256": "0626894ae661f2b12b4770fc764074e1d876e1628007ebafbbaccae67931e8a5",
+      "width": 512,
+      "height": 400,
+      "frames": 32
+    },
+    {
+      "file": "/demos/hinge.gif",
+      "bytes": 456302,
+      "sha256": "adad760bc4b14dd514402a9af61a1ec62383af244e53e21e59b45957fe427154",
+      "width": 512,
+      "height": 400,
+      "frames": 32
+    },
+    {
+      "file": "/demos/bridge.gif",
+      "bytes": 461259,
+      "sha256": "77ddcdea084db7092804257c33a1fc8301cd78443ca83476909ff679957dd8c7",
+      "width": 512,
+      "height": 400,
+      "frames": 32
+    },
+    {
+      "file": "/demos/deadbug.gif",
+      "bytes": 474974,
+      "sha256": "1dec6a4484c9011b6984650e425deb11e50195a6fbf992ad52e4a79257eefb2f",
+      "width": 512,
+      "height": 400,
+      "frames": 32
+    }
+  ],
+  "stillFrames": [
+    {
+      "file": "/demos/squat.png",
+      "bytes": 24433,
+      "sha256": "f0e2ef27e621e6d11bde96ee71ef0338c61cbce614df582a04e6c3c9a37c0334",
+      "width": 512,
+      "height": 400
+    },
+    {
+      "file": "/demos/pushup.png",
+      "bytes": 26333,
+      "sha256": "6763844c5eca96e84fcdab79208b49247be19ddeeead6f191547c093f2a250f9",
+      "width": 512,
+      "height": 400
+    },
+    {
+      "file": "/demos/row.png",
+      "bytes": 30770,
+      "sha256": "9e7346f463f14ee8b8edf1c8d5881dd4e026990d9628893e3f4ce9713d78fc91",
+      "width": 512,
+      "height": 400
+    },
+    {
+      "file": "/demos/hinge.png",
+      "bytes": 24616,
+      "sha256": "3dfaeaf042c6d2c3bbb8b6de84d52d7f38b85dc673db07989cdacc725154904b",
+      "width": 512,
+      "height": 400
+    },
+    {
+      "file": "/demos/bridge.png",
+      "bytes": 24697,
+      "sha256": "34205a900d5d9c45210459a6cfe0d991c6a18852925f39434b1021d06d492f69",
+      "width": 512,
+      "height": 400
+    },
+    {
+      "file": "/demos/deadbug.png",
+      "bytes": 25908,
+      "sha256": "3f49838852c14020422a5f0f47dc25ad469bf4084c95533a12349e28b5f1cbce",
+      "width": 512,
+      "height": 400
+    }
+  ],
+  "videos": []
+}
