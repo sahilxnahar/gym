@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceArchive": "forge-source.zip (movement media) and FitQuest-complete.zip (audited; reference preview only)",
-  "note": "The Forge archive supplies six local movement GIFs and matching stills. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.",
+  "note": "The Forge archive supplies six local movement GIFs and matching stills. Three reduced-size Home preview GIFs are derived from those local originals. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.",
   "equipmentIllustrations": [
     {
       "file": "/equipment/resistance-band-set.svg",
@@ -57,6 +57,35 @@
       "sha256": "1dec6a4484c9011b6984650e425deb11e50195a6fbf992ad52e4a79257eefb2f",
       "width": 512,
       "height": 400,
+      "frames": 32
+    }
+  ],
+  "previewGifs": [
+    {
+      "file": "/demos/previews/squat-preview.gif",
+      "bytes": 87857,
+      "sha256": "1a205153e3ee7ac7db257d8d0979cdcc2c490ef186d46317955a3e7824c46dee",
+      "derivedFrom": "/demos/squat.gif",
+      "width": 180,
+      "height": 141,
+      "frames": 32
+    },
+    {
+      "file": "/demos/previews/pushup-preview.gif",
+      "bytes": 99937,
+      "sha256": "d3185b62fe2bc90cf8c1882ead3bee266697b7c75dcc36236f80bf0fb793f3ee",
+      "derivedFrom": "/demos/pushup.gif",
+      "width": 180,
+      "height": 141,
+      "frames": 32
+    },
+    {
+      "file": "/demos/previews/bridge-preview.gif",
+      "bytes": 98218,
+      "sha256": "7a14010a5d0f599f084ea7cbbb3a82b69ca928a0957905a11f098750bdac2f64",
+      "derivedFrom": "/demos/bridge.gif",
+      "width": 180,
+      "height": 141,
       "frames": 32
     }
   ],

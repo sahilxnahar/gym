@@ -7,10 +7,10 @@ Forge is a local-first, gym-focused training PWA for planning a session, logging
 ## What you can do
 
 - Browse an offline exercise library with local movement GIFs and stills; filter by bodyweight, resistance bands, dumbbells or gym equipment.
-- Build an editable 1–7 day plan with 15–90 minute sessions, movement focus, gentle options and optional supersets. Quick workouts let you log a short bodyweight, band or walking session without rebuilding your plan.
+- Build an editable 1–7 day plan with 15–90 minute sessions, movement focus, gentle options and optional supersets. Home highlights 3- and 5-minute no-equipment bodyweight sessions with local movement previews; short band and walking options are available too.
 - Record workouts, sets, cardio, rest, bodyweight entries and unfinished sessions. A first-login merge keeps local and account journals together; later offline edits are merged or preserved as a clearly marked copy rather than silently overwritten.
 - See today's progress, lifetime points, levels, streaks and optional campaign missions on Home. The campaign includes a progress-to-tier bar and level-up reward notices. Choose the Ground-Up Builder or Legacy Architect story; both share the same ranks, rewards and workouts, with no purchases or penalties.
-- Set water, walking and supplement reminder schedules. Push notifications are opt-in **for each device**, use quiet hours/time zones and are best-effort, not guaranteed alarms. Page-based reminders only run while the app is open.
+- Set optional at-home workout, water, walking and supplement reminders. The home-workout nudge gives one simple movement idea at a chosen time/day. Push notifications are opt-in **for each device**, respect quiet hours/time zones and are best-effort, not guaranteed alarms. Page-based reminders only run while the app is open.
 - Read eight source-linked supplement summaries in the library. They explain evidence and cautions; Forge does not choose products, prescribe doses or screen medicines/interactions.
 - Use the optional adult BMI screening calculator and general activity suggestions. BMI is not a diagnosis, isn't saved, and never selects your workout load or goal.
 - Choose warm, charcoal or high-contrast appearance, equipment, availability, workout time, body focus and optional synced food notes. Forge uses one self-hosted Barlow type family throughout the interface. The Training Ledger mark—a session record with an ember completion point—appears in the app shell and install icons.

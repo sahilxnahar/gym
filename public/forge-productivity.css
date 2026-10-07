@@ -33,6 +33,17 @@
 .quick-workout-option small{color:var(--forge-muted)}
 .quick-workout-option>span{margin-top:3px;color:var(--forge-ember-dark);font-size:12px;font-weight:850}
 .quick-workout-option:disabled{opacity:.55;cursor:not-allowed}
+.forge-movement-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 4px}
+.forge-movement-preview{display:grid;align-content:start;gap:8px;min-width:0;padding:9px;text-align:left;border:1px solid var(--forge-line);border-radius:11px;background:var(--forge-panel);color:var(--forge-ink);cursor:pointer}
+.forge-movement-preview:hover{border-color:var(--forge-ember);background:color-mix(in srgb,var(--forge-panel) 88%,var(--forge-ember) 12%)}
+.forge-movement-preview:focus-visible{outline:3px solid var(--forge-ember);outline-offset:3px}
+.forge-movement-preview picture{display:block;overflow:hidden;border-radius:8px;background:var(--forge-paper)}
+.forge-movement-preview img{display:block;width:100%;height:92px;object-fit:contain}
+.forge-movement-preview span{display:grid;gap:3px}
+.forge-movement-preview strong{font-size:13px;line-height:1.2}
+.forge-movement-preview small{color:var(--forge-muted);font-size:11px}
+.forge-movement-preview em{color:var(--forge-ember-dark);font-size:11px;font-style:normal;font-weight:850}
+.home-workout-reminder-action{margin-top:10px}
 .forge-reminder-card form{display:grid;gap:13px;margin-top:15px}
 .reminder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .reminder-grid fieldset,.quiet-hours{min-width:0;margin:0;padding:15px;border:1px solid var(--forge-line);border-radius:11px;background:var(--forge-panel)}
@@ -83,3 +94,4 @@ body[data-theme="contrast"] .reminder-grid fieldset,body[data-theme="contrast"] 
 @media(max-width:760px){.reminder-grid,.forge-supplement-grid{grid-template-columns:1fr}.forge-home-extras,.forge-tools-extras,.forge-settings-extras{gap:13px}.reminder-grid fieldset>p{min-height:0}.forge-section-heading{gap:8px}.quick-workout-option{min-height:90px}}
 @media(max-width:430px){.forge-home-extras,.forge-tools-extras,.forge-settings-extras{margin-top:12px}.forge-quick-card .quick-workout-grid,.forge-quick-menu{grid-template-columns:1fr}.quick-workout-option{min-height:78px}.account-actions{display:grid;grid-template-columns:1fr}.account-actions button{width:100%}.forge-supp-reminder{align-items:flex-start;flex-direction:column}.forge-device-row{align-items:flex-start}.forge-reminder-card,.forge-account-card,.forge-supplement-library,.forge-quick-card{padding:16px}.reminder-clock{max-width:125px;overflow:hidden;text-overflow:ellipsis}}
 @media(prefers-reduced-motion:reduce){.quick-workout-option{transition:none}.quick-workout-option:hover:not(:disabled){transform:none}}
+@media(max-width:430px){.forge-movement-preview-grid{gap:6px}.forge-movement-preview{gap:6px;padding:6px}.forge-movement-preview img{height:70px}.forge-movement-preview strong{font-size:12px}.forge-movement-preview small,.forge-movement-preview em{font-size:10px}}
