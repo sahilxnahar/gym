@@ -1,0 +1,66 @@
+/* Forge campaign, story picker and chapter map. All colors inherit Forge's theme tokens. */
+.forge-campaign-card{display:grid;gap:16px;margin:0;padding:clamp(16px,2.6vw,24px);overflow:hidden}
+.campaign-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px;padding:clamp(18px,3vw,26px);border:1px solid #191915;border-radius:12px;background:var(--forge-graphite);color:#f8f4eb}
+.campaign-head .tag{border-color:#5a5145;background:#38352e;color:#f0a17f}
+.campaign-head h2{margin:9px 0 5px;color:#fffdf8;font-size:clamp(23px,3.2vw,31px);font-weight:900;letter-spacing:-.035em;line-height:1.08}
+.campaign-head p{max-width:62ch;margin:0;color:#e4dfd4;line-height:1.48}
+.campaign-rank{display:grid;min-width:128px;justify-items:end;gap:4px;padding:11px 14px;border:1px solid #5a5145;border-radius:10px;background:#35332d}
+.campaign-rank span,.campaign-overline{color:#a65a3b;font-size:10px;font-weight:900;letter-spacing:.12em}
+.campaign-rank span{color:#e2a184}
+.campaign-rank strong{color:#fffdf8;font-size:19px;font-weight:900}
+.campaign-rank small{color:#d8d1c4}
+.campaign-chapter{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(190px,.8fr);align-items:center;gap:18px;padding:17px 18px;border:1px solid var(--forge-line);border-radius:11px;background:#f0ece3}
+.campaign-chapter h3,.campaign-missions h3{margin:4px 0;font-size:19px;font-weight:850;letter-spacing:-.02em}
+.campaign-chapter p{margin:3px 0 0;color:var(--forge-muted);font-size:14px}
+.campaign-progress{display:grid;gap:7px}
+.campaign-progress progress{display:block;width:100%;height:12px;overflow:hidden;border:0;border-radius:999px;accent-color:var(--forge-ember)}
+.campaign-progress progress::-webkit-progress-bar{border-radius:999px;background:#d9d2c6}
+.campaign-progress progress::-webkit-progress-value{border-radius:999px;background:var(--forge-ember)}
+.campaign-progress progress::-moz-progress-bar{border-radius:999px;background:var(--forge-ember)}
+.campaign-progress small{color:var(--forge-muted);font-size:12px;line-height:1.35}
+.campaign-missions{display:grid;gap:8px}
+.campaign-missions-heading{display:flex;align-items:end;justify-content:space-between;gap:12px}
+.campaign-optional{padding:5px 9px;border:1px solid var(--forge-line);border-radius:999px;color:var(--forge-muted);font-size:11px;font-weight:750;white-space:nowrap}
+.campaign-mission,.campaign-map-quest{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 13px;border:1px solid var(--forge-line);border-radius:9px;background:var(--forge-panel)}
+.campaign-mission>span:first-child,.campaign-map-quest>span:first-child{display:grid;gap:3px;min-width:0}
+.campaign-mission strong,.campaign-map-quest strong{font-size:14px;font-weight:800}
+.campaign-mission small,.campaign-map-quest small{color:var(--forge-muted);font-size:12px;line-height:1.4}
+.mission-progress{flex:none;color:var(--forge-muted);font-size:12px;font-weight:850;white-space:nowrap}
+.mission-progress.is-complete{color:var(--forge-green)}
+.campaign-actions{margin-top:1px}
+.campaign-footnote{margin:0;color:var(--forge-muted)}
+.campaign-clear{margin:0;padding:12px;border:1px dashed var(--forge-line);border-radius:9px;color:var(--forge-muted);font-size:13px}
+.campaign-map{display:grid;gap:12px}
+.campaign-map>p{margin:0 0 3px;color:var(--forge-muted)}
+.campaign-map h3{margin:7px 0 1px;font-size:17px}
+.campaign-map-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.campaign-map-summary>span{display:grid;gap:2px;padding:11px 12px;border:1px solid var(--forge-line);border-radius:9px;background:var(--forge-panel)}
+.campaign-map-summary small{color:var(--forge-muted);font-size:11px}
+.campaign-map-summary strong{font-size:16px;font-weight:850}
+.campaign-chapters,.campaign-map-quests{display:grid;gap:8px}
+.campaign-node{display:grid;grid-template-columns:84px minmax(0,1fr);align-items:start;gap:12px;padding:12px;border:1px solid var(--forge-line);border-radius:9px;background:var(--forge-panel)}
+.campaign-node.unlocked{border-color:#aeb9a9;background:#f2f4ee}
+.campaign-node-state{padding:4px 7px;border-radius:5px;background:#e7e2d7;color:var(--forge-muted);font-size:10px;font-weight:900;letter-spacing:.04em;text-align:center}
+.campaign-node.unlocked .campaign-node-state{background:#e1eadc;color:#355e49}
+.campaign-node b{font-size:14px}
+.campaign-node p{margin:2px 0;color:var(--forge-muted);font-size:12px}
+.campaign-node small{color:var(--forge-ember-dark);font-size:11px;font-weight:700}
+.campaign-node .campaign-unlock-copy{display:block;margin-top:4px;color:var(--forge-muted);font-size:11px;font-weight:500}
+.forge-story-picker{min-width:0;margin:13px 0 10px;padding:13px;border:1px solid var(--forge-line);border-radius:11px}
+.forge-story-picker legend{padding:0 6px;font-size:13px;font-weight:850}
+.forge-story-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.forge-story-choice{display:grid;grid-template-columns:22px minmax(0,1fr);align-items:start;gap:9px;min-height:92px;margin:0;padding:12px;border:1px solid var(--forge-line);border-radius:9px;background:var(--forge-panel);cursor:pointer}
+.forge-story-choice input{width:20px;min-width:20px;min-height:20px;margin:2px 0 0;accent-color:var(--forge-ember)}
+.forge-story-choice span{display:grid;gap:4px}
+.forge-story-choice strong{font-size:14px;font-weight:850}
+.forge-story-choice small{color:var(--forge-muted);font-size:12px;line-height:1.4}
+.forge-story-choice:focus-within{outline:3px solid var(--forge-ember);outline-offset:2px}
+.forge-story-note{margin:3px 0 12px;color:var(--forge-muted);font-size:12px}
+body[data-theme="charcoal"] .campaign-chapter{background:#242a25}
+body[data-theme="charcoal"] .campaign-node.unlocked{background:#29352c}
+body[data-theme="charcoal"] .campaign-node.unlocked .campaign-node-state{background:#34483a;color:#c9e2ca}
+body[data-theme="contrast"] .campaign-chapter,body[data-theme="contrast"] .campaign-node,body[data-theme="contrast"] .campaign-mission,body[data-theme="contrast"] .campaign-map-quest,body[data-theme="contrast"] .forge-story-choice{border-width:2px;background:#fff;color:#080808}
+body[data-theme="contrast"] .campaign-node-state{border:1px solid #171717;color:#080808}
+@media(max-width:650px){.campaign-head{grid-template-columns:1fr}.campaign-rank{justify-items:start;width:max-content;min-width:0}.campaign-chapter{grid-template-columns:1fr}.forge-story-choices{grid-template-columns:1fr}.forge-story-choice{min-height:0}.campaign-map-summary{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:430px){.campaign-head{padding:16px}.campaign-chapter{padding:14px}.campaign-map-summary{gap:5px}.campaign-map-summary>span{padding:8px}.campaign-map-summary strong{font-size:14px}.campaign-node{grid-template-columns:70px minmax(0,1fr);gap:8px;padding:10px}.campaign-mission,.campaign-map-quest{align-items:flex-start}.campaign-actions{display:grid;grid-template-columns:1fr}.campaign-actions button{width:100%}}
+@media(prefers-reduced-motion:reduce){.campaign-head,.campaign-mission,.campaign-node{scroll-behavior:auto;transition:none}}

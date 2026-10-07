@@ -12,9 +12,15 @@
   --forge-shadow:0 8px 26px rgba(42,38,30,.07);
   --forge-radius:14px;
 }
+@font-face{font-family:"Barlow";font-style:normal;font-weight:400;src:url("/fonts/barlow-latin-400-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:500;src:url("/fonts/barlow-latin-500-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:600;src:url("/fonts/barlow-latin-600-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:700;src:url("/fonts/barlow-latin-700-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:800;src:url("/fonts/barlow-latin-800-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:900;src:url("/fonts/barlow-latin-900-normal.woff2") format("woff2");font-display:swap}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:24px}
-body{background:var(--forge-paper);color:var(--forge-ink);font:16px/1.55 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}
+body{background:var(--forge-paper);color:var(--forge-ink);font:16px/1.55 "Barlow",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}
 button,input,select,textarea{font:inherit}
 button{min-height:48px;border-radius:9px;border:1px solid var(--forge-line);background:var(--forge-panel);color:var(--forge-ink);font-weight:700;padding:10px 15px;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,background-color .16s ease,border-color .16s ease}
 button:hover{border-color:#aaa296;box-shadow:0 5px 13px rgba(42,38,30,.12);transform:translateY(-1px)}
@@ -70,7 +76,7 @@ main{max-width:1450px}
 .forge-how summary{width:max-content;max-width:100%;font-size:14px;font-weight:700;cursor:pointer}
 .forge-how p{margin:8px 0 0;font-size:14px}
 .forge-start-card .privacy-note{margin-top:10px;color:#cfc8bb;font-size:12px}
-.forge-start-mark{display:grid;justify-items:center;gap:8px;color:#cfc8bb;font:800 10px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.17em;text-align:center}
+.forge-start-mark{display:grid;justify-items:center;gap:8px;color:#cfc8bb;font:800 10px/1.55 "Barlow",system-ui,sans-serif;letter-spacing:.17em;text-align:center}
 .forge-start-mark img{width:116px;height:116px;border:1px solid #4c4940;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.22)}
 .plan-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:20px;margin:16px 0}
 .plan-summary h2{margin:9px 0 5px;font-size:21px;line-height:1.25}

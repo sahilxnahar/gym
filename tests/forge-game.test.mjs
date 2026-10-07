@@ -18,11 +18,11 @@ test('quick-workout choices cover no-equipment, band and walking sessions',()=>{
 });
 
 test('fantasy progression is optional and earned rewards are derived from logged work',()=>{
- const state={version:1,workouts:[],settings:{adventureMode:true}};
- assert.match(game.render(state),/Ember Map/);assert.equal(game.snapshot(state).level,1);
- const finished=Array.from({length:13},(_,i)=>({id:'w'+i,name:'Workout',started:i*100000,finished:i*100000+50000,exercises:[]}));
- const progressed=game.snapshot({...state,workouts:finished});
- assert.ok(progressed.level>=2);assert.ok(progressed.rewards.length>=1);assert.match(game.renderMap({...state,workouts:finished}),/rewards/i);
+  const state={version:1,workouts:[],settings:{adventureMode:true}};
+  assert.match(game.render(state),/Ground-Up Builder/);assert.equal(game.snapshot(state).level,1);
+  const finished=Array.from({length:13},(_,i)=>({id:'w'+i,name:'Workout',started:i*100000,finished:i*100000+50000,exercises:[]}));
+  const progressed=game.snapshot({...state,workouts:finished});
+  assert.ok(progressed.level>=2);assert.ok(progressed.rewards.length>=1);assert.match(game.renderMap({...state,workouts:finished}),/rewards/i);
  assert.match(game.render({...state,workouts:finished}),/<progress value="1040" max="2000"/);
  assert.equal(game.render({...state,settings:{adventureMode:false}}),'');
 });
