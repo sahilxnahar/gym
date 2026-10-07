@@ -78,16 +78,16 @@
       out.sessions.push({id:'ft-plan-'+i,name,exercises:unique.map(key=>({...pool[key],sets:Array.from({length:setCount},()=>({reps,weight:0,rpe:null,done:false}))})),minutes:p.minutes,notes:'Editable starting template. Include a gentle warm-up; allow rest between sets. Duration is an estimate.'});
     }
     out.eligible=true; out.weeklyGoal=count;
-    out.summary=count+' resistance sessions per week · '+(split?'upper/lower split':'full-body foundation')+'.';
+    out.summary=count+' workouts per week · '+(split?'upper- and lower-body basics':'whole-body basics')+'.';
     out.rationale=[
-      'Consistency and training the major muscle groups at least twice weekly matter more than a complicated routine.',
-      novice?'Beginner and returning profiles start with 2–3 resistance days, even when more days are available.':'Experienced profiles may use up to 4 resistance days; more availability does not automatically mean more lifting.',
+      'A steady routine matters more than a complicated one.',
+      novice?'If you are new or returning, Forge starts with 2–3 workout days, even when more days are available.':'If you train often, Forge may suggest up to 4 workout days.',
       p.goal==='strength'?'Strength focus: practice controlled repetitions; experienced equipment users receive a lower repetition starting target.':p.goal==='muscle'?'Muscle focus: a moderate repetition starting target, with manageable initial set counts.':p.goal==='fatLoss'?'Fat-loss goal: resistance training supports strength and function. This plan does not promise weight loss or assign calorie targets.':'Fitness focus: balanced movement practice and repeatable sessions.',
-      'Session length limits the number of exercises. The selected body focus changes accessories while retaining a balanced foundation.',
-      'Weight, height and appearance do not establish a body type or a safe lifting load.'
+      'Session length limits the number of exercises. The plan uses a balanced mix of movements.',
+      'Weight and height do not determine how much you should lift.'
     ];
     out.activityHint=low?'Optional comfortable walking or stationary cycling between resistance sessions; avoid jumping.':'Optional comfortable walking or other enjoyable easy activity between resistance sessions.';
-    out.loadHint+=' Start with an easy variation or light load that allows controlled reps with a few reps left. The logged 0 kg is a placeholder, not a load prescription.';
+    out.loadHint+=' Start with an easy version or light weight that lets you move with control. A logged value of 0 kg means no extra weight was recorded; it is not a recommendation.';
     out.progressionHint='When every set feels controlled across repeated sessions, add a rep or a small load increment. Change one variable at a time; reduce difficulty if form deteriorates. Spread resistance sessions across the week and allow recovery.';
     out.notice+=' Templates require your review and can be edited before applying. Timing includes recovery and varies by person.';
     return out;

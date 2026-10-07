@@ -1,25 +1,25 @@
 {
   "id": "/",
-  "name": "GYM — Training Journal",
-  "short_name": "GYM",
-  "description": "A private, offline-first workout journal that turns consistent effort into visible progress.",
+  "name": "Forge \u2014 Your workout journal",
+  "short_name": "Forge",
+  "description": "A simple, private workout journal. Plan a session, record what you did, and follow your progress.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#e4e7e3",
-  "theme_color": "#242a27",
+  "background_color": "#f3f0e8",
+  "theme_color": "#24231f",
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }

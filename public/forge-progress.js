@@ -40,17 +40,17 @@
     const xpToNext = XP_PER_LEVEL - levelProgress;
     const streak = streakDays(sessions);
     const badges = [
-      { mark: '01', name: 'First set', note: 'Complete a set', earned: completedSets > 0 },
-      { mark: '03', name: 'In rhythm', note: 'Build a 3-day streak', earned: streak >= 3 },
-      { mark: '10', name: 'Ten strong', note: 'Log 10 sessions', earned: sessions.length >= 10 }
+      { mark: '01', name: 'First workout', note: 'Finish one workout', earned: sessions.length >= 1 },
+      { mark: '03', name: 'Three days in a row', note: 'Log on three consecutive days', earned: streak >= 3 },
+      { mark: '10', name: 'Ten workouts', note: 'Finish 10 workouts', earned: sessions.length >= 10 }
     ];
 
-    return `<section class="momentum-panel" aria-label="Training level and achievements">
+    return `<section class="momentum-panel" aria-label="Forge points and milestones">
       <div class="momentum-main">
-        <div class="momentum-heading"><span class="micro-label">YOUR MOMENTUM</span><span class="momentum-level">LEVEL ${level}</span></div>
-        <div class="momentum-title-row"><h2>${xp.toLocaleString()} <small>XP</small></h2><span class="momentum-streak"><b>${streak}</b><small>DAY STREAK</small></span></div>
-        <progress class="momentum-track" aria-label="Progress to next level" value="${levelProgress}" max="${XP_PER_LEVEL}"></progress>
-        <div class="momentum-caption"><span>${xpToNext.toLocaleString()} XP to Level ${level + 1}</span><span>${XP_PER_SESSION} XP per session · ${XP_PER_SET} XP per completed set</span></div>
+        <div class="momentum-heading"><span class="micro-label">YOUR PROGRESS</span><span class="momentum-level">FORGE LEVEL ${level}</span></div>
+        <div class="momentum-title-row"><h2>${xp.toLocaleString()} <small>FORGE POINTS</small></h2><span class="momentum-streak"><b>${streak}</b><small>DAYS IN A ROW</small></span></div>
+        <progress class="momentum-track" aria-label="Progress to the next Forge level" value="${levelProgress}" max="${XP_PER_LEVEL}"></progress>
+        <div class="momentum-caption"><span>${xpToNext.toLocaleString()} points to Level ${level + 1}</span><span>${XP_PER_SESSION} points per finished workout · ${XP_PER_SET} points per completed set</span></div>
       </div>
       <div class="momentum-badges" aria-label="Milestones">
         ${badges.map(badge => `<div class="momentum-badge ${badge.earned ? 'earned' : ''}"><span class="badge-mark">${badge.earned ? '✓' : badge.mark}</span><span><b>${badge.name}</b><small>${badge.note}</small></span></div>`).join('')}
@@ -58,5 +58,5 @@
     </section>`;
   }
 
-  window.GymProgress = Object.freeze({ XP_PER_SET, XP_PER_SESSION, XP_PER_LEVEL, streakDays, totalXp, render });
+  window.ForgeProgress = Object.freeze({ XP_PER_SET, XP_PER_SESSION, XP_PER_LEVEL, streakDays, totalXp, render });
 })();

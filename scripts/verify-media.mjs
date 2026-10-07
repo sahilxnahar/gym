@@ -130,8 +130,8 @@ const serviceWorker = await readFile(path.join(publicDir, 'sw.js'), 'utf8');
 const html = await readFile(path.join(publicDir, 'index.html'), 'utf8');
 assert(app.includes('/demos/${key}.${paused?\'png\':\'gif\'}'), 'The exercise guide does not point to the local GIF/still files');
 assert(serviceWorker.includes("['squat','pushup','row','hinge','bridge','deadbug']"), 'The service worker demo list does not match the six supplied guides');
-assert(serviceWorker.includes("'/gym-progress.js'") && serviceWorker.includes("'/media-manifest.json'"), 'The service worker does not precache the progress module and media manifest');
-assert(html.includes('/gym-progress.js'), 'The app shell does not load the local progression module');
+assert(serviceWorker.includes("'/forge-progress.js'") && serviceWorker.includes("'/media-manifest.json'"), 'The service worker does not precache the progress module and media manifest');
+assert(html.includes('/forge-progress.js'), 'The app shell does not load the local progression module');
 
 const report = {
   schemaVersion: 1,

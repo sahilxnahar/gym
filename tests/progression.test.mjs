@@ -3,8 +3,8 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 globalThis.window = {};
-await import('../public/gym-progress.js');
-const progress = globalThis.window.GymProgress;
+await import('../public/forge-progress.js');
+const progress = globalThis.window.ForgeProgress;
 const sessionOn = day => ({ finished: new Date(2026, 9, day, 12).getTime() });
 
 test('XP is derived only from completed sessions and completed sets', () => {
@@ -23,16 +23,16 @@ test('streak uses consecutive local calendar days and allows yesterday to stay a
 
 test('progress rendering explains XP rewards and only unlocks earned milestones', () => {
   const html = progress.render([sessionOn(7)], 1);
-  assert.match(html, /90 <small>XP<\/small>/);
-  assert.match(html, /80 XP per session/);
-  assert.match(html, /10 XP per completed set/);
+  assert.match(html, /90 <small>FORGE POINTS<\/small>/);
+  assert.match(html, /80 points per finished workout/);
+  assert.match(html, /10 points per completed set/);
   assert.match(html, /class="momentum-badge earned"/);
-  assert.match(html, /Progress to next level/);
+  assert.match(html, /Progress to the next Forge level/);
 });
 
 test('toast and progress feedback do not depend on CSP-blocked inline styles', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
-  const progressSource = await readFile(new URL('../public/gym-progress.js', import.meta.url), 'utf8');
+  const progressSource = await readFile(new URL('../public/forge-progress.js', import.meta.url), 'utf8');
   assert.doesNotMatch(app, /\$\('#toast'\)\.style\.display/);
   assert.doesNotMatch(progressSource, /\sstyle=/);
 });

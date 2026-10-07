@@ -1,44 +1,38 @@
-# Gym PWA — implementation plan
+# Forge PWA — implementation and design plan
 
 ## Product direction
 
-Build a local-first, mobile-first training journal from the supplied Forge application, adding FitQuest-style progression signals without introducing seeded workout history or fabricated personal records. Preserve the exercise catalogue, set-by-set logging, reusable routines, rest timer, session history, bodyweight tracking, weekly goal, onboarding, JSON backup/restore, optional single-owner account sync, installable PWA shell, and offline movement guides. The app is a private journal on each device by default; the optional hosted account is single-owner and is not a public multi-user service.
+Build a local-first, mobile-first training journal from the supplied workout app. Keep the exercise catalogue, editable plans, set-by-set logging, rest timer, workout history, optional bodyweight entries, weekly target, backups, single-owner cloud sync, installable PWA shell and offline movement guides. Do not invent workout history or personal records. The repository is called `Gym`; the product is **Forge**.
 
-Review all ten user-provided repositories for product patterns and licensing, then incorporate only ideas that fit this scope. Do not copy code, images, GIFs, or videos from third-party projects without a verified license and attribution. Keep the supplied Forge notices and original demo media. OpenAI Gym is a reinforcement-learning toolkit, not a gym-workout tracker.
+The ten linked repositories informed feature ideas and boundaries. Keep their code and media out of Forge unless a license explicitly permits reuse. Preserve the supplied Forge source notice and original schematic demos. OpenAI Gym is a reinforcement-learning toolkit, not a workout tracker.
 
-## Design
+## Visual and interaction system
 
-- **Design movement:** tactile industrial realism, adapted from the Industrial style reference. The interface should feel like a carefully engineered training instrument: solid, legible, and lively rather than a generic dark SaaS dashboard.
-- **Core principles:** physical feedback; training-first clarity; truthful progress derived from the user's journal; private-by-default data.
-- **Color philosophy:** a cool workshop-grey chassis and warm off-white panels keep long workout sessions readable. Graphite anchors navigation and high-contrast content. Safety orange is the ownable action color; a restrained signal-green marks completed work and progress. Avoid decorative gradients and keep text contrast strong.
-- **Layout paradigm:** a compact fixed equipment-rail on wide screens with a broad, asymmetric overview; on phones, use a thumb-friendly bottom rail and stack session controls in their natural order. Workout logging remains the primary action.
-- **Signature elements:** bolted-panel cards with subtle top-left highlights; recessed data-entry wells; a small LED/orange status mark paired with workout streak and level progress.
-- **Interaction philosophy:** controls behave like physical switches: immediate pressed states, forgiving forms, clear confirmation for destructive actions, and visible saved/offline state. The quick-log action should complement—not replace—set-by-set sessions.
-- **Animation:** short mechanical easing for presses, drawer/modal transitions, progress fills, and toasts; respect `prefers-reduced-motion`; never animate workout controls in a way that interferes with logging.
-- **Typography system:** native system sans for headings and body copy; system monospace for XP, weights, timer, set counts, and uppercase equipment labels. Do not rely on remote fonts so the PWA remains usable offline.
-- **Brand essence:** a private training journal that makes consistent work easier to see and repeat; **precise, resilient, encouraging**.
-- **Brand voice:** short, grounded prompts that celebrate showing up without claiming coaching authority. Examples: “Make the work count.” and “One session closer.”
-- **Wordmark & logo:** a custom `G` built as an equipment-dial mark, with the wordmark `GYM` in a tight uppercase lockup and matching local SVG/PNG app icons.
-- **Signature brand color:** safety orange `#F05A36`.
+- **Direction:** a calm, tactile workshop notebook. Use warm paper for reading, charcoal for structure, and ember orange for the primary action. Avoid generic gradients, remote fonts and decorative stock images.
+- **Hierarchy:** one useful action per screen; a secondary action only when it serves a distinct task. Keep Home to a start card, the user's plan, journal-derived progress and recent workouts.
+- **Language:** use Home, Plans, Workouts and Progress. Explain a set and a repetition beside the workout controls and plan review. Move deeper plan reasoning and optional effort scores into clearly named disclosures. Call cloud storage “account sync” in user-facing copy.
+- **First run:** show a two-choice welcome. Ask about goal, experience, availability, equipment and safety needs in short steps. Skip body measurements. Let users review a plan before saving it.
+- **Brand:** warm-paper background `#F3F0E8`, charcoal `#24231F`, ember `#DF6A47` and a restrained green for completed work. Use the Forge F mark for the favicon and install icons.
+- **Accessibility:** skip link, meaningful labels, visible focus, strong contrast, touch-friendly controls, native dialogs and reduced-motion support. Do not make information available only through color.
+- **Progress:** derive points, levels, streaks, milestones and personal bests from the journal. Explain each visible number and keep pressure-free rest-day language.
 
-## Implementation and architecture
+## Implementation
 
-Use the supplied Forge Node.js 24+ server and vanilla JavaScript/CSS rather than introducing an unnecessary framework. Keep workout records local in browser storage by default. Retain the optional authenticated single-owner SQLite sync backend only with a Railway persistent volume and production origin configured; do not present it as multi-user hosting. Serve same-origin static files and local demo media, and cache the complete app shell and guides in the service worker.
+Use the supplied Node.js 24+ server and vanilla JavaScript/CSS. Keep browser storage as the default; expose optional authenticated owner sync only with a Railway persistent volume and production origin configured. Serve scripts, styles and movement media from the same origin and cache the complete app shell in the service worker.
 
-### Project structure
+- `public/index.html`: accessible PWA shell and Forge brand.
+- `public/app.js`: screens, first-run flow and workout interactions.
+- `public/training.js`: exercise data, safety gating and editable plan recommendations.
+- `public/forge-progress.js`: journal-derived points and milestones.
+- `public/forge-theme.css`: responsive visual system and control states.
+- `public/demos/`: six supplied local movement GIFs and six still frames.
+- `public/sw.js`, `public/manifest.webmanifest`, `public/icon.*`: install and offline support.
+- `scripts/verify-media.mjs`: validate source media, hashes, references and offline precache.
+- `scripts/generate-icons.py`: reproduce the Forge icon PNGs; Pillow is only needed to regenerate assets.
+- `tests/` and `docs/`: behavioral checks, reference notes, media inventory and interface review.
 
-- `server.mjs`: same-origin static server, health endpoint, request validation, and optional single-owner account API.
-- `public/index.html`: PWA document shell, application navigation, and local script/style entry points.
-- `public/app.js`: journal screens and workout interactions.
-- `public/training.js`: exercise catalogue, onboarding/profile logic, and workout-plan helpers.
-- `public/exercise-library.js`: bundled licensed English exercise metadata.
-- `public/styles.css` and `public/gym-progress.js`: visual system and derived progression display.
-- `public/demos/`: original, locally shipped GIF demonstrations and still frames.
-- `public/sw.js`, `public/manifest.webmanifest`, `public/icon.*`: installation and offline cache.
-- `scripts/verify-media.mjs`: checks local GIF/still files, references, and offline precache coverage.
-- `tests/`: the supplied API, state-validation, training, PWA, and catalogue checks plus media checks.
-- `docs/`: reference review, media inventory, and self-hosting/deployment guidance.
+## Deployment
 
-## Deployment notes
+The Railway project `Gym` hosts service `gym-pwa` at <https://gym-pwa-production-d169.up.railway.app/>. It uses the repository Dockerfile, `/health`, a generated HTTPS domain and a persistent volume mounted at `/data`. Production origin, data directory, mode and the one-time setup token remain in Railway variables, never in the repository.
 
-The private Railway project `Gym` now hosts the production service `gym-pwa` at <https://gym-pwa-production-d169.up.railway.app/>. It uses the repository Dockerfile, a generated HTTPS domain, `/health`, and a persistent `/data` volume. `APP_ORIGIN`, `DATA_DIR=/data`, `NODE_ENV=production`, and the unique `SETUP_TOKEN` are Railway environment variables; the setup token is stored locally outside the repo and ZIP. The app remains local-first; the backend supports one owner account only, not multi-user cloud fitness data. The extra unconfigured `gym` service was deleted at the owner's direction; the 50GB default volume remains attached to `gym-pwa`.
+The service uses one running app instance and supports a single owner account. A duplicate unconfigured service named `gym` was removed at the owner's direction. The owner chose to retain Railway's default 50 GB data volume; its size has not been changed.
