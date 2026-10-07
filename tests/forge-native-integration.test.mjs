@@ -51,6 +51,12 @@ test('Android requests only read-only STEPS, with background and historical read
   const permissions = declarations.filter(item => !item.source.includes('tools:node="remove"')).map(item => item.name);
   assert.deepEqual(permissions.sort(), ['android.permission.INTERNET', 'android.permission.health.READ_STEPS'].sort());
   assert.ok(declarations.some(item => item.name === 'android.permission.ACCESS_FINE_LOCATION' && item.source.includes('tools:node="remove"')));
+  for (const name of ['android.permission.ACCESS_NETWORK_STATE', 'android.permission.RECEIVE_BOOT_COMPLETED', 'android.permission.WAKE_LOCK', 'com.google.android.gms.permission.ACTIVITY_RECOGNITION']) {
+    assert.ok(declarations.some(item => item.name === name && item.source.includes('tools:node="remove"')), `${name} should be removed from the merged app`);
+  }
+  const audit = read('mobile/scripts/verify-android-manifest.py');
+  assert.match(audit, /DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION/);
+  assert.match(audit, /protectionLevel.*signature|signature.*protectionLevel/);
   const health = JSON.parse(read('mobile/android/healthfitness.config.json'));
   assert.match(read('mobile/android/variables.gradle'), /minSdkVersion\s*=\s*26/);
   assert.deepEqual(health.permissions, { STEPS: 'Read' });
