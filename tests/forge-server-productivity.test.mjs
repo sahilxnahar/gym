@@ -33,6 +33,7 @@ test('reminder schedules, opt-in diet sync, quick-workout drafts and account-dat
   state.sessionDrafts = [{ id: 'draft-1', name: 'Five-minute reset', started: Date.now(), notes: '', exercises: [] }];
   state.reminders.water = { enabled: true, intervalMinutes: 120, start: '09:00', end: '19:00', days: [1, 2, 3, 4, 5] };
   state.reminders.walking.enabled = true;
+  state.reminders.homeWorkout = { enabled: true, time: '17:30', days: [1, 3, 5] };
   state.reminders.supplements = [{ id: 'vitamin-note', label: 'My supplement reminder', time: '09:30', days: [1, 3, 5], enabled: true }];
   state.foodPreferences = { syncEnabled: true, value: { pattern: 'vegetarian', note: 'Test-only preference' } };
   assert.equal(validState(state), true);
@@ -40,6 +41,7 @@ test('reminder schedules, opt-in diet sync, quick-workout drafts and account-dat
   assert.equal(saved.status, 200);
   const loaded = await (await fetch(setup.origin + '/api/state', { headers: headers(setup.origin, session), cache: 'no-store' })).json();
   assert.deepEqual(loaded.state.reminders.supplements[0].label, 'My supplement reminder');
+  assert.deepEqual(loaded.state.reminders.homeWorkout, state.reminders.homeWorkout);
   assert.deepEqual(loaded.state.foodPreferences, state.foodPreferences);
   assert.equal(loaded.state.sessionDrafts[0].id, 'draft-1');
   const storage = await (await fetch(setup.origin + '/api/storage', { headers: headers(setup.origin, session) })).json();

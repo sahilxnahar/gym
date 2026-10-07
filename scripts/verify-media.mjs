@@ -7,6 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = path.join(root, 'public');
 const demosDir = path.join(publicDir, 'demos');
 const expectedDemos = ['squat', 'pushup', 'row', 'hinge', 'bridge', 'deadbug'];
+const expectedPreviews = ['squat', 'pushup', 'bridge'];
 const manifestPath = path.join(publicDir, 'media-manifest.json');
 const updateManifest = process.argv.includes('--write-manifest');
 
@@ -77,6 +78,7 @@ async function inspectPng(buffer, file) {
 async function inspectFiles() {
   const gifFiles = [];
   const stillFiles = [];
+  const previewGifFiles = [];
   for (const name of expectedDemos) {
     const gifName = `${name}.gif`;
     const stillName = `${name}.png`;
@@ -95,6 +97,17 @@ async function inspectFiles() {
         ...details
       });
     }
+  }
+
+  for (const name of expectedPreviews) {
+    const filename = `${name}-preview.gif`;
+    const relative = `previews/${filename}`;
+    const file = path.join(demosDir, relative);
+    const buffer = await readFile(file).catch(() => null);
+    assert(buffer?.length > 100 && buffer.length <= 120000, `Missing, empty or oversized home preview: public/demos/${relative}`);
+    const details = inspectGif(buffer, relative);
+    assert(details.width <= 180 && details.height <= 141 && details.frames >= 16, `Home preview ${relative} must remain small and animated`);
+    previewGifFiles.push({ file: `/demos/${relative}`, bytes: buffer.length, sha256: sha256(buffer), derivedFrom: `/demos/${name}.gif`, ...details });
   }
 
   async function walk(directory) {
@@ -121,15 +134,19 @@ async function inspectFiles() {
     videos.push({ file: `/${path.relative(publicDir, file).split(path.sep).join('/')}`, bytes: buffer.length, sha256: sha256(buffer) });
   }
 
-  return { gifFiles, stillFiles, videos };
+  return { gifFiles, stillFiles, previewGifFiles, videos };
 }
 
 const media = await inspectFiles();
 const app = await readFile(path.join(publicDir, 'app.js'), 'utf8');
+const enhancements = await readFile(path.join(publicDir, 'forge-enhancements.js'), 'utf8');
 const serviceWorker = await readFile(path.join(publicDir, 'sw.js'), 'utf8');
 const html = await readFile(path.join(publicDir, 'index.html'), 'utf8');
 assert(app.includes('/demos/${key}.${paused?\'png\':\'gif\'}'), 'The exercise guide does not point to the local GIF/still files');
 assert(serviceWorker.includes("['squat','pushup','row','hinge','bridge','deadbug']"), 'The service worker demo list does not match the six supplied guides');
+assert(enhancements.includes('/demos/previews/${key}-preview.gif'), 'The Home card does not point to a local small GIF preview');
+assert(serviceWorker.includes("const PREVIEW_GIFS=['squat','pushup','bridge'].map(key=>'/demos/previews/'+key+'-preview.gif')"), 'The service worker preview list does not match the Home movement cards');
+assert(serviceWorker.includes('...DEMOS,...PREVIEW_GIFS,...FONT_ASSETS'), 'The service worker does not precache the home movement GIF previews');
 assert(serviceWorker.includes("'/forge-progress.js'") && serviceWorker.includes("'/media-manifest.json'"), 'The service worker does not precache the progress module and media manifest');
 for (const asset of ['/forge-tools.js', '/forge-superset.js', '/forge-reminders.js', '/forge-sync.js', '/forge-game.js', '/supplement-library.js', '/forge-cloud-sync.js', '/forge-enhancements.js', '/forge-extras.css', '/forge-productivity.css', '/equipment/resistance-band-set.svg']) {
   assert((asset.endsWith('.svg') ? app : html).includes(asset), `The app shell or Tools template does not load ${asset}`);
@@ -143,9 +160,10 @@ assert(html.includes('/forge-progress.js'), 'The app shell does not load the loc
 const report = {
   schemaVersion: 1,
   sourceArchive: 'forge-source.zip (movement media) and FitQuest-complete.zip (audited; reference preview only)',
-  note: 'The Forge archive supplies six local movement GIFs and matching stills. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.',
+  note: 'The Forge archive supplies six local movement GIFs and matching stills. Three reduced-size Home preview GIFs are derived from those local originals. The FitQuest archive has one reference webp preview, not runtime media. Neither supplied archive contains video files.',
   equipmentIllustrations: [{ file: '/equipment/resistance-band-set.svg', bytes: bandBytes.length, sha256: sha256(bandBytes), source: 'Original Forge vector inspired by the user-supplied resistance-band product reference; no retailer branding or screenshot included.' }],
   gifs: media.gifFiles,
+  previewGifs: media.previewGifFiles,
   stillFrames: media.stillFiles,
   videos: media.videos
 };
@@ -158,4 +176,4 @@ if (updateManifest) {
   assert(JSON.stringify(committed) === JSON.stringify(report), 'public/media-manifest.json is stale; regenerate it with npm run media:manifest');
 }
 
-console.log(`Verified ${media.gifFiles.length} animated GIFs (${media.gifFiles.reduce((n, file) => n + file.frames, 0)} total frames), ${media.stillFiles.length} still frames, and ${media.videos.length} local videos.`);
+console.log(`Verified ${media.gifFiles.length} full guide GIFs (${media.gifFiles.reduce((n, file) => n + file.frames, 0)} total frames), ${media.previewGifFiles.length} small animated previews, ${media.stillFiles.length} still frames, and ${media.videos.length} local videos.`);

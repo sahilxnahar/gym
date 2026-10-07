@@ -36,11 +36,34 @@ test('all new interactive assets load locally and are included in offline precac
 test('the Training Ledger logo is used consistently across app, install icons and offline cache',()=>{
  const html=read('../public/index.html'),icon=read('../public/icon.svg'),sw=read('../public/sw.js'),manifest=JSON.parse(read('../public/manifest.webmanifest'));
  assert.match(icon,/aria-label="Forge Training Ledger"/);assert.ok(icon.includes('M31 98V24h49'),'app icon is missing the selected ledger mark');assert.ok(icon.includes('M78 79l8 8 17-21'),'app icon is missing the ember completion mark');
- assert.match(html,/href="\/icon\.svg"/);assert.deepEqual(manifest.icons.map(item=>item.src),['/icon-192.png','/icon-512.png']);assert.match(sw,/forge-v13-native-notices-levelup/);
- for(const path of ['/icon.svg','/icon-192.png','/icon-512.png'])assert.ok(sw.includes(`'${path}'`),`offline cache missing ${path}`);
- for(const [file,size] of [['icon-192.png',192],['icon-512.png',512]]){const png=readFileSync(new URL(`../public/${file}`,import.meta.url));assert.equal(png.readUInt32BE(16),size,`${file} width`);assert.equal(png.readUInt32BE(20),size,`${file} height`);}
+ assert.match(html,/href="\/icon\.svg"/);assert.deepEqual(manifest.icons.map(item=>item.src),['/icon-192.png','/icon-512.png']);assert.match(sw,/forge-v14-home-workouts/);
+  for(const path of ['/icon.svg','/icon-192.png','/icon-512.png'])assert.ok(sw.includes(`'${path}'`),`offline cache missing ${path}`);
+  for(const [file,size] of [['icon-192.png',192],['icon-512.png',512]]){const png=readFileSync(new URL(`../public/${file}`,import.meta.url));assert.equal(png.readUInt32BE(16),size,`${file} width`);assert.equal(png.readUInt32BE(20),size,`${file} height`);}
 });
 test('AGPL source and exact OpenGym adaptation are visible to contributors',()=>{
  const html=read('../public/index.html'),readme=read('../README.md'),notice=read('../OPEN_GYM_ATTRIBUTION.md'),license=read('../LICENSE');
  assert.match(html,/Source code/);assert.match(readme,/AGPL-3\.0-only/);assert.match(notice,/active-workout-order\.js/);assert.match(notice,/media|image/i);assert.match(license,/GNU AFFERO GENERAL PUBLIC LICENSE/i);
+});
+
+test('Home offers no-gym sessions with local previews and reduced-motion stills',()=>{
+ const enhancements=read('../public/forge-enhancements.js'),sw=read('../public/sw.js'),manifest=JSON.parse(read('../public/media-manifest.json'));
+ assert.match(enhancements,/NO GYM NEEDED · BODYWEIGHT/);
+ assert.match(enhancements,/A small home workout still counts/);
+ assert.match(enhancements,/Set a home-workout reminder/);
+ assert.match(enhancements,/forge-home-workout-enabled/);
+ assert.ok(enhancements.includes("cfg.homeWorkout = { enabled: $('#forge-home-workout-enabled').checked"),'Home reminder form does not save its chosen schedule');
+ assert.ok(enhancements.includes("if (action === 'open-reminders') { app.setPage('tools');"),'Home reminder shortcut does not open Tools');
+ assert.match(enhancements,/prefers-reduced-motion: reduce/);
+ assert.match(enhancements,/\/demos\/previews\/\$\{key\}-preview\.gif/);
+ assert.match(enhancements,/\/demos\/\$\{key\}\.png/);
+ assert.match(sw,/forge-v14-home-workouts/);
+ assert.ok(sw.includes("const DEMOS=['squat','pushup','row','hinge','bridge','deadbug'].flatMap(key=>['gif','png'].map(ext=>'/demos/'+key+'.'+ext))"),'Full GIF/still guide list is not cached offline');
+ assert.ok(sw.includes("const PREVIEW_GIFS=['squat','pushup','bridge'].map(key=>'/demos/previews/'+key+'-preview.gif')"),'Small Home previews are not cached offline');
+ assert.ok(sw.includes('...DEMOS,...PREVIEW_GIFS,...FONT_ASSETS'),'Preview list is not in the offline app shell');
+ for(const key of ['squat','pushup','bridge']){
+  assert.ok(manifest.gifs.some(item=>item.file===`/demos/${key}.gif`),`${key} GIF missing from media manifest`);
+  assert.ok(manifest.previewGifs.some(item=>item.file===`/demos/previews/${key}-preview.gif`),`${key} small preview GIF missing from media manifest`);
+  assert.ok(manifest.previewGifs.find(item=>item.file===`/demos/previews/${key}-preview.gif`).bytes<120000,`${key} preview is not lightweight`);
+  assert.ok(manifest.stillFrames.some(item=>item.file===`/demos/${key}.png`),`${key} still missing from media manifest`);
+ }
 });
