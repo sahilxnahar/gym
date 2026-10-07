@@ -32,7 +32,7 @@ export function validState(state) {
   const profileOK = value => { try { globalThis.ForgeTraining.validateProfile(value); return true; } catch { return false; } };
   const foodPatterns = new Set(['none', 'vegetarian', 'vegan', 'pescatarian', 'halal', 'kosher', 'gluten-free', 'dairy-free', 'other']);
   const foodPreferences = value => value === null || (isObject(value) && typeof value.syncEnabled === 'boolean' && (value.syncEnabled ? isObject(value.value) && foodPatterns.has(value.value.pattern) && validString(value.value.note, 400) : value.value === null));
-  const settings = value => isObject(value) && ['kg', 'lb'].includes(value.unit) && validNumber(value.rest, 0, 600) && optional(value.theme, v => ['warm', 'charcoal', 'contrast'].includes(v)) && optional(value.adventureMode, v => typeof v === 'boolean');
+  const settings = value => isObject(value) && ['kg', 'lb'].includes(value.unit) && validNumber(value.rest, 0, 600) && optional(value.theme, v => ['warm', 'charcoal', 'contrast'].includes(v)) && optional(value.adventureMode, v => typeof v === 'boolean') && optional(value.gameMode, v => ['ground-up', 'legacy'].includes(v));
   return isObject(state) && optional(state.profile, profileOK) && optional(state.profilePlanIds, v => Array.isArray(v) && v.length <= 6 && v.every(id => validString(id, 100, true)) && new Set(v).size === v.length) &&
     state.version === 1 && Array.isArray(state.workouts) && state.workouts.length <= 10000 && state.workouts.every(workout) && unique(state.workouts) &&
     Array.isArray(state.routines) && state.routines.length <= 1000 && state.routines.every(routine) && unique(state.routines) &&
@@ -242,7 +242,7 @@ export function createApp(options = {}) {
       let payload;
       try { if (!statSync(file).isFile()) throw new Error(); payload = readFileSync(file); }
       catch { return send(res, 404, { error: 'Not found' }); }
-      const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.png': 'image/png', '.gif': 'image/gif', '.ico': 'image/x-icon' };
+      const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.png': 'image/png', '.gif': 'image/gif', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8' };
       res.setHeader('Content-Type', types[extname(file)] || 'application/octet-stream');
       res.setHeader('Cache-Control', 'no-cache');
       res.writeHead(200); res.end(req.method === 'HEAD' ? undefined : payload);
